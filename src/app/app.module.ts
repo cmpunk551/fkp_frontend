@@ -15,6 +15,7 @@ import {LoginComponent} from './login/login.component';
 import {AuthGuard} from './helpers/auth.guard';
 import {InlineSVGModule} from 'ng-inline-svg';
 import {ClickOutsideModule} from 'ng-click-outside';
+import {DocumentAnalysisComponent} from './document-analysis/document-analysis.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import {ClickOutsideModule} from 'ng-click-outside';
     VersionComponent,
     LoginComponent,
     CounterComponent,
+    DocumentAnalysisComponent,
     FetchDataComponent
   ],
   imports: [
@@ -34,6 +36,7 @@ import {ClickOutsideModule} from 'ng-click-outside';
     ClickOutsideModule,
     RouterModule.forRoot([
       {path: '', component: HomeComponent, pathMatch: 'full', canActivate: [AuthGuard]},
+      {path: 'analysis', component: DocumentAnalysisComponent},
       {path: 'versions', component: VersionComponent},
       {path: 'login', component: LoginComponent},
       {path: 'counter', component: CounterComponent},

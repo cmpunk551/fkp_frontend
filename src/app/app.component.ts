@@ -21,4 +21,7 @@ export class AppComponent {
   public openSideBar(showSideBar: boolean) {
     this.showSideBar = showSideBar;
   }
+  public closeSidebar () {
+    this.showSideBar = false;
+  }
 }
