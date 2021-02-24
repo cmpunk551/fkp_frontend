@@ -16,6 +16,7 @@ import {AuthGuard} from './helpers/auth.guard';
 import {InlineSVGModule} from 'ng-inline-svg';
 import {ClickOutsideModule} from 'ng-click-outside';
 import {DocumentAnalysisComponent} from './document-analysis/document-analysis.component';
+import {UploadComponent} from './upload/upload.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {DocumentAnalysisComponent} from './document-analysis/document-analysis.c
     LoginComponent,
     CounterComponent,
     DocumentAnalysisComponent,
-    FetchDataComponent
+    UploadComponent,
+    FetchDataComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
