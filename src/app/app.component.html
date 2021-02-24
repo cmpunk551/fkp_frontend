@@ -1,0 +1,15 @@
+<body>
+  <div class="container-fluid justify-content-start" [ngClass]="{'d-flex': currentUser}">
+    <div class="static-sidebar" *ngIf="currentUser">
+      <button  [inlineSVG]="'./assets/icons/toggle-icon.svg'"
+              [setSVGAttributes]="{'width' : '16px', 'height' : '12px'}" class=" navbar-toggler" (click)="openSideBar(!showSideBar)" >
+      </button>
+    </div>
+    <div class="d-flex" id="wrapper" [ngClass]="{'toggled': !showSideBar}">
+      <app-nav-menu *ngIf="currentUser"  [show]="showSideBar" (showChange)="openSideBar($event)"></app-nav-menu>
+      <div class="page-content-wrapper container">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</body>

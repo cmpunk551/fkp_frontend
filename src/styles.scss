@@ -1,0 +1,67 @@
+@import 'styles/scss/modules/fonts.scss';
+
+a {
+  color: #0366d6;
+}
+
+code {
+  color: #e01a76;
+}
+
+body {
+  font-family: Golos, Arial, sans-serif;
+  background-color: #F2F7FB;
+}
+
+.container-fluid {
+  padding: 0;
+}
+
+#wrapper {
+  overflow-x: hidden;
+}
+
+#sidebar-wrapper {
+  min-height: 100vh;
+  min-width: 16vw;
+  margin-left: -20vw;
+  -webkit-transition: margin .25s ease-out;
+  -moz-transition: margin .25s ease-out;
+  -o-transition: margin .25s ease-out;
+  transition: margin .25s ease-out;
+  padding-top: 24px;
+}
+
+.static-sidebar {
+  min-height: 100vh;
+  background-color: #192A3B;
+}
+.navbar-toggler {
+  margin-left: 24px;
+  margin-right: 28px;
+  margin-top: 38px;
+  ;
+}
+
+#page-content-wrapper {
+  min-width: 100vw;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+  margin-left: 0;
+}
+
+@media (min-width: 768px) {
+  #sidebar-wrapper {
+    margin-left: 0;
+  }
+
+  #page-content-wrapper {
+    min-width: 0;
+    width: 100%;
+  }
+
+  #wrapper.toggled #sidebar-wrapper {
+    margin-left: -20vw;
+  }
+}

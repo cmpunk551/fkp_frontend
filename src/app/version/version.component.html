@@ -1,0 +1,25 @@
+  <ng-container *ngFor="let version of versions">
+    <div class="card">
+      <h5 class="card-header">Проекты версии «{{version.name}}». Код: {{version.code}}</h5>
+      <div class="card-body">
+        <table class="table table-responsive table-striped">
+          <thead>
+          <tr class="table-primary">
+            <th scope="col">Код проекта</th>
+            <th scope="col">Название проекта</th>
+            <th scope="col">Трудозатраты</th>
+          </tr>
+          </thead>
+          <tbody>
+          <ng-container *ngFor="let project of version.projectProjects">
+            <tr>
+              <td>{{project.code}}</td>
+              <td>{{project.name}}</td>
+              <td>{{project.laborCost}}</td>
+            </tr>
+          </ng-container>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </ng-container>

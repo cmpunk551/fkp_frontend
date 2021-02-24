@@ -1,0 +1,20 @@
+#sidebar-wrapper {
+  background: #192A3B;
+  color: #fff;
+}
+
+#sidebar-wrapper .sidebar-heading {
+  padding: 0.875rem 1.25rem;
+}
+#sidebar-wrapper .sidebar-heading, h3 {
+  font-size: 16px;
+  display: inline-block;
+}
+.sidebar-logo {
+  display: inline-block;
+  margin-right: 12px;
+}
+
+#sidebar-wrapper .list-group {
+  width: 15rem;
+}
