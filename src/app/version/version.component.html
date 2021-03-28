@@ -1,21 +1,133 @@
-  <ng-container *ngFor="let version of versions">
-    <div class="card">
-      <h5 class="card-header">Проекты версии «{{version.name}}». Код: {{version.code}}</h5>
+<div class="loader" *ngIf="!isLoaded"></div>
+<div class="container-fluid justify-content-start" *ngIf="isLoaded">
+  <ng-container class="card" *ngIf="current_version">
+    <div class="version-select dropdown">
+      <div (click)="showSelector()">
+        <span *ngIf="current_version" class="select-item">{{current_version.name}}</span>
+        <button class="btn dropdown-toggle"></button>
+        <p><small class="text-muted">{{current_version.description}}</small></p>
+
+      </div>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"  [ngClass]="{'show': toggleFlag}">
+        <ng-select class="dropdown-item"
+                   [clearable]="false"
+                   [searchable]="true"
+                   [placeholder]="'поиск'"
+                   [(ngModel)]="current_version"
+                   (ngModelChange)="changeCurrentVersion()">
+          <ng-container *ngFor="let version of versions">
+            <ng-option [value]="version">{{version.name}}</ng-option>
+          </ng-container>
+        </ng-select>
+      </div>
+    </div>
+    <div class="info-cards row" *ngIf="current_version">
+      <div class="card col-3 flex-row flex-wrap ">
+        <div class="card-header" [inlineSVG]="'./assets/icons/rub.svg'"  [setSVGAttributes]="{'width' : '36px', 'height' : '36px'}"></div>
+        <div class="card-block">
+          <span class="card-title">ФИНАНСИРОВАНИЕ</span>
+          <h4 class="card-text"> {{ current_version.generalInfo.totalFinanceLimit}}млн</h4>
+        </div>
+      </div>
+      <div class="card col-3 flex-row flex-wrap ">
+        <div class="card-header" [inlineSVG]="'./assets/icons/project.svg'" [setSVGAttributes]="{'width' : '36px', 'height' : '36px'}"></div>
+        <div class="card-block">
+          <span class="card-title">ПРОЕКТОВ</span>
+          <h4 class="card-text"> {{current_version.generalInfo.totalProjects}}</h4>
+        </div>
+      </div>
+      <div class="card col-3 flex-row flex-wrap ">
+        <div class="card-header" [inlineSVG]="'./assets/icons/event.svg'" [setSVGAttributes]="{'width' : '36px', 'height' : '36px'}"></div>
+        <div class="card-block">
+          <span class="card-title">МЕРОПРИЯТИЯ</span>
+          <h4 class="card-text">{{current_version.generalInfo.totalWorks}} </h4>
+        </div>
+      </div>
+      <div class="card col-3 flex-row flex-wrap ">
+        <div class="card-header" [inlineSVG]="'./assets/icons/launch.svg'" [setSVGAttributes]="{'width' : '36px', 'height' : '36px'}"></div>
+        <div class="card-block">
+          <span class="card-title">ЗАПУСКИ</span>
+          <p class="card-text h4"> {{current_version.generalInfo.totalLaunches}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="card table-card">
       <div class="card-body">
-        <table class="table table-responsive table-striped">
+        <span class="card-title">Цели</span>
+        <table class="table table-borderless table-striped">
           <thead>
-          <tr class="table-primary">
-            <th scope="col">Код проекта</th>
-            <th scope="col">Название проекта</th>
-            <th scope="col">Трудозатраты</th>
+          <tr>
+            <th scope="col">Тип</th>
+            <th scope="col">Наименование</th>
           </tr>
           </thead>
           <tbody>
-          <ng-container *ngFor="let project of version.projectProjects">
+            <ng-container *ngFor=" let goal of current_version.goals">
+              <tr>
+                <th>{{goal.type}}</th>
+                <td>{{goal.name}}</td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card table-card">
+      <div class="card-body">
+        <span class="card-title">Проекты</span>
+        <table class="table table-borderless table-striped">
+          <thead>
+          <tr>
+            <th scope="col">Шифр</th>
+            <th scope="col">Наименование</th>
+            <th scope="col">Тип проекта</th>
+            <th scope="col">Приоритет</th>
+            <th scope="col">Стоимость</th>
+            <th scope="col">Освоено</th>
+            <th scope="col">Остаток</th>
+          </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor=" let project of current_version.projectProjects">
+              <tr>
+                <th>{{project.code}}</th>
+                <td>{{project.name}}</td>
+                <td>{{project.systemName}}</td>
+                <td>{{project.priority}}</td>
+                <td>{{project.cost}}</td>
+                <td>{{project.mastered}}</td>
+                <td>{{project.remains}}</td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card table-card">
+      <div class="card-body">
+        <span class="card-title">Мероприятия</span>
+        <table class="table table-borderless table-striped">
+          <thead>
+          <tr>
+            <th scope="col">Шифр</th>
+            <th scope="col">Наименование</th>
+            <th scope="col">Раздел Программы</th>
+            <th scope="col">Начало</th>
+            <th scope="col">Окончание</th>
+            <th scope="col">Проект</th>
+            <th scope="col">Выполнено</th>
+          </tr>
+          </thead>
+          <tbody>
+          <ng-container *ngFor=" let events of current_version.work_events">
             <tr>
-              <td>{{project.code}}</td>
-              <td>{{project.name}}</td>
-              <td>{{project.laborCost}}</td>
+              <th></th>
+              <td>{{events.name}}</td>
+              <td>{{events.sectionIdCode}}</td>
+              <td>{{events.dateFrom}}</td>
+              <td>{{events.dateTo}}</td>
+              <td>{{events.projectIdCode}}</td>
+              <td>{{events.isDoneValue}}</td>
             </tr>
           </ng-container>
           </tbody>
@@ -23,3 +135,6 @@
       </div>
     </div>
   </ng-container>
+</div>
+
+

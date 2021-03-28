@@ -1,0 +1,44 @@
+.card {
+  padding-right: 40px;
+  padding-left: 40px;
+  box-shadow: 0px 4px 12px rgba(100, 128, 159, 0.1);
+  border-radius: 8px;
+
+
+  margin: 37.5% 22% ;
+  .card-header {
+    border: none;
+    background-color: white;
+    display: inline-flex;
+    padding-top: 47px;
+    .header-logo {
+      display: inline-flex;
+      padding-top: 0;
+      margin-right: 21px;
+
+    }
+    .header-text {
+      margin-top: 10px;
+      display: inline-flex;
+      font-size: 20px;
+      font-weight: 600;
+    }
+  }
+  .card-low {
+    width: 100%;
+    margin-right: 0;
+    .page-link {
+      border: none;
+      background-color: white;
+      padding-left: 0;
+      font-size: 12px;
+    }
+    .button-container {
+      background-color: white;
+    }
+  }
+}
+input::-webkit-input-placeholder {
+  color: black;
+  opacity: 0.25;
+}

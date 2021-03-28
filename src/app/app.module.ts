@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 
@@ -17,6 +17,8 @@ import {InlineSVGModule} from 'ng-inline-svg';
 import {ClickOutsideModule} from 'ng-click-outside';
 import {DocumentAnalysisComponent} from './document-analysis/document-analysis.component';
 import {UploadComponent} from './upload/upload.component';
+import {NgSelectModule} from '@ng-select/ng-select';
+import {JwtInterceptor} from './helpers/jwt.interceptor';
 
 @NgModule({
   declarations: [
@@ -36,8 +38,9 @@ import {UploadComponent} from './upload/upload.component';
     FormsModule,
     InlineSVGModule.forRoot(),
     ClickOutsideModule,
+    NgSelectModule,
     RouterModule.forRoot([
-      {path: '', component: HomeComponent, pathMatch: 'full', canActivate: [AuthGuard]},
+      {path: '', component: VersionComponent, pathMatch: 'full', canActivate: [AuthGuard]},
       {path: 'analysis', component: DocumentAnalysisComponent},
       {path: 'versions', component: VersionComponent},
       {path: 'login', component: LoginComponent},
@@ -46,7 +49,10 @@ import {UploadComponent} from './upload/upload.component';
     ]),
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
