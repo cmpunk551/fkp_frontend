@@ -1,11 +1,24 @@
  <div id="sidebar-wrapper" >
     <div class="sidebar-header">
       <div class="sidebar-logo" [inlineSVG]="'./assets/icons/logo-icon.svg'" [setSVGAttributes]="{'width' : '40px', 'height' : '40px'}"></div>
-      <h3 [routerLink]="['/']">АС ИАО СЦПП</h3>
+      <h3 [routerLink]="['/']">АС ИАО СПЦП</h3>
     </div>
-      <ul>
-        <li [routerLink]="['/analysis']">Добавить документ</li>
-        <li (click)="logout()">Выйти</li>
-      </ul>
+      <div class="menus">
+        <div class="menu">
+          <span class="menu-header">Программы</span>
+          <ul class="menu-list">
+            <li class="menu-list-item" [routerLink]="['/versions']">Действующие</li>
+            <li class="menu-list-item">Архив</li>
+            <li class="menu-list-item" [routerLink]="['/analysis']">Формирование программы</li>
+          </ul>
+        </div>
+        <div class="side-menu">
+          <span class="menu-header">Система</span>
+          <ul class="menu-list ">
+            <li class="menu-list-item" [routerLink]="['/admin']" *ngIf="authService.currentUserIsAdmin">Администрирование</li>
+            <li class="menu-list-item" (click)="logout()">Выйти</li>
+          </ul>
+        </div>
+      </div>
  </div>
 

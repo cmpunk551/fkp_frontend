@@ -2,7 +2,6 @@
   background: #192A3B;
   color: #fff;
   padding-top: 38px;
-  height: 100%;
 }
 
 #sidebar-wrapper .sidebar-heading {
@@ -19,4 +18,36 @@
 
 #sidebar-wrapper .list-group {
   width: 15rem;
+}
+
+.menu {
+  margin-top: 28px;
+}
+.menu-header {
+  font-size: 10px;
+  line-height: 12px;
+  text-transform: uppercase;
+  color: #64809F;
+}
+.menu-list {
+  list-style-type: none;
+  .menu-list-item {
+    margin-top: 16px;
+    font-size: 14px;
+    line-height: 17px;
+    color: #64809F;
+  }
+  .menu-list-item:hover {
+    color: white;
+  }
+}
+
+.side-menu-list {
+  list-style-type: none;
+  .side-menu-list-item {
+    margin-top: 16px;
+    font-size: 14px;
+    line-height: 17px;
+    color: #64809F;
+  }
 }

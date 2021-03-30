@@ -74,8 +74,8 @@ export class VersionComponent implements OnInit {
     await this.http.get<IVersion[]>( environment.apiUrl + '/versions').subscribe(response => {
       this.versions = response;
       this.current_version = this.versions[0];
-      this.getGoals();
       this.getGeneralInfo();
+      this.getGoals();
       this.getProjects();
       this.getWorkEvents();
       console.log(this.current_version);
@@ -91,6 +91,7 @@ export class VersionComponent implements OnInit {
   public async getGoals() {
     await this.http.get<IGoal[]>(environment.apiUrl + '/versions/getGoals/' + this.current_version.rid).subscribe(response => {
       this.current_version.goals = response;
+      console.log(response);
     });
   }
   public async getProjects() {

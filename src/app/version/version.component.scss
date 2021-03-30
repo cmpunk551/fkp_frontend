@@ -66,6 +66,7 @@
 .table-card {
   background: #FFFFFF;
   border-radius: 8px;
+  max-width: 90%;
   border-color: white;
   .card-title {
     margin-top: 24px;
@@ -79,9 +80,9 @@
     font-size: 12px;
   }
   .table {
-    margin-top: 16px;
+    margin: 16px 24px;
+    max-width: 95%;
     display:block;
     max-height : 400px;
-    overflow-y : scroll;
   }
 }

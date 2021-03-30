@@ -21,6 +21,10 @@ export class AuthService {
     return this.$currentUser.value;
   }
 
+  public get currentUserIsAdmin () {
+    return this.currentUserValue.roles.includes('admin');
+  }
+
   public login(username: string, password: string) {
     return this.http.post<any>(`${environment.apiUrl}/auth/login`, { username, password })
       .pipe(map(user => {

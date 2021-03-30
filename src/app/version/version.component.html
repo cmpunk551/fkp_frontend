@@ -3,7 +3,7 @@
   <ng-container class="card" *ngIf="current_version">
     <div class="version-select dropdown">
       <div (click)="showSelector()">
-        <span *ngIf="current_version" class="select-item">{{current_version.name}}</span>
+        <span *ngIf="current_version" class="select-item">{{current_version.code}}</span>
         <button class="btn dropdown-toggle"></button>
         <p><small class="text-muted">{{current_version.description}}</small></p>
 
@@ -16,7 +16,7 @@
                    [(ngModel)]="current_version"
                    (ngModelChange)="changeCurrentVersion()">
           <ng-container *ngFor="let version of versions">
-            <ng-option [value]="version">{{version.name}}</ng-option>
+            <ng-option [value]="version">{{version.code}}</ng-option>
           </ng-container>
         </ng-select>
       </div>
@@ -54,84 +54,66 @@
     <div class="card table-card">
       <div class="card-body">
         <span class="card-title">Цели</span>
-        <table class="table table-borderless table-striped">
-          <thead>
-          <tr>
-            <th scope="col">Тип</th>
-            <th scope="col">Наименование</th>
-          </tr>
-          </thead>
-          <tbody>
-            <ng-container *ngFor=" let goal of current_version.goals">
-              <tr>
-                <th>{{goal.type}}</th>
-                <td>{{goal.name}}</td>
-              </tr>
-            </ng-container>
-          </tbody>
-        </table>
+        <dx-data-grid class="table"
+                      id="goalsContainer"
+                      [dataSource]="this.current_version.goals"
+                      [hoverStateEnabled]="true"
+                      [allowColumnReordering]="true">
+          <dxi-column  caption="Тип" dataField="type" dataType="string"></dxi-column>
+          <dxi-column caption="Наименование" dataField="name" dataType="string"></dxi-column>
+          <dxo-search-panel [placeholder]="'Поиск'" [visible]="true"></dxo-search-panel>
+          <dxo-group-panel [emptyPanelText]="'Группировать по полю'" [allowColumnDragging]="true" [visible]="true"></dxo-group-panel>
+          <dxo-grouping texts="true: 'kek'" [autoExpandAll]="true"></dxo-grouping>
+          <dxo-scrolling mode="infinite"></dxo-scrolling>
+        </dx-data-grid>
       </div>
     </div>
     <div class="card table-card">
       <div class="card-body">
         <span class="card-title">Проекты</span>
-        <table class="table table-borderless table-striped">
-          <thead>
-          <tr>
-            <th scope="col">Шифр</th>
-            <th scope="col">Наименование</th>
-            <th scope="col">Тип проекта</th>
-            <th scope="col">Приоритет</th>
-            <th scope="col">Стоимость</th>
-            <th scope="col">Освоено</th>
-            <th scope="col">Остаток</th>
-          </tr>
-          </thead>
-          <tbody>
-            <ng-container *ngFor=" let project of current_version.projectProjects">
-              <tr>
-                <th>{{project.code}}</th>
-                <td>{{project.name}}</td>
-                <td>{{project.systemName}}</td>
-                <td>{{project.priority}}</td>
-                <td>{{project.cost}}</td>
-                <td>{{project.mastered}}</td>
-                <td>{{project.remains}}</td>
-              </tr>
-            </ng-container>
-          </tbody>
-        </table>
+        <dx-data-grid class="table"
+          id="projectContainer"
+          [dataSource]="this.current_version.projectProjects"
+          [hoverStateEnabled]="true"
+          [allowColumnReordering]="true"
+          [showBorders]="true">
+          <dxi-column  caption="Шифр" dataField="code" dataType="string"></dxi-column>
+          <dxi-column caption="Наименование" dataField="name" dataType="string"></dxi-column>
+          <dxi-column caption="Тип проекта" dataField="systemName" dataType="string"></dxi-column>
+          <dxi-column caption="Приоритет" dataField="priority" dataType="string"></dxi-column>
+          <dxi-column caption="Стоимость" dataField="cost" dataType="string"></dxi-column>
+          <dxi-column caption="Освоено" dataField="mastered" dataType="string"></dxi-column>
+          <dxi-column caption="Остаток" dataField="remains" dataType="string"></dxi-column>
+          <dxo-search-panel [placeholder]="'Поиск'" [visible]="true"></dxo-search-panel>
+          <dxo-group-panel [emptyPanelText]="'Группировать по полю'" [allowColumnDragging]="true" [visible]="true"></dxo-group-panel>
+          <dxo-grouping texts="true: 'kek'" [autoExpandAll]="true"></dxo-grouping>
+          <dxo-scrolling mode="infinite"></dxo-scrolling>
+        </dx-data-grid>
       </div>
     </div>
+
     <div class="card table-card">
       <div class="card-body">
         <span class="card-title">Мероприятия</span>
-        <table class="table table-borderless table-striped">
-          <thead>
-          <tr>
-            <th scope="col">Шифр</th>
-            <th scope="col">Наименование</th>
-            <th scope="col">Раздел Программы</th>
-            <th scope="col">Начало</th>
-            <th scope="col">Окончание</th>
-            <th scope="col">Проект</th>
-            <th scope="col">Выполнено</th>
-          </tr>
-          </thead>
-          <tbody>
-          <ng-container *ngFor=" let events of current_version.work_events">
-            <tr>
-              <th></th>
-              <td>{{events.name}}</td>
-              <td>{{events.sectionIdCode}}</td>
-              <td>{{events.dateFrom}}</td>
-              <td>{{events.dateTo}}</td>
-              <td>{{events.projectIdCode}}</td>
-              <td>{{events.isDoneValue}}</td>
-            </tr>
-          </ng-container>
-          </tbody>
-        </table>
+        <dx-data-grid class="table"
+                      id="workEventsContainer"
+                      [dataSource]="this.current_version.work_events"
+                      [hoverStateEnabled]="true"
+                      [remoteOperations]="false"
+                      [allowColumnReordering]="true"
+                      [showBorders]="true">
+          <dxi-column  caption="Шифр" dataField="name" dataType="string"></dxi-column>
+          <dxi-column caption="Наименование" dataField="name" dataType="string"></dxi-column>
+          <dxi-column caption="Раздел Программы" dataField="sectionIdCode" dataType="string"></dxi-column>
+          <dxi-column caption="Начало" dataField="dateFrom" dataType="string"></dxi-column>
+          <dxi-column caption="Окончание" dataField="dateTo" dataType="string"></dxi-column>
+          <dxi-column caption="Проект" dataField="projectIdCode" dataType="string"></dxi-column>
+          <dxi-column caption="Выполнено" dataField="isDoneValue" dataType="string"></dxi-column>
+          <dxo-search-panel [placeholder]="'Поиск'" [visible]="true"></dxo-search-panel>
+          <dxo-group-panel [emptyPanelText]="'Группировать по полю'" [allowColumnDragging]="true" [visible]="true"></dxo-group-panel>
+          <dxo-grouping [allowCollapsing]="true" [autoExpandAll]="true"></dxo-grouping>
+          <dxo-scrolling mode="infinite"></dxo-scrolling>
+        </dx-data-grid>
       </div>
     </div>
   </ng-container>

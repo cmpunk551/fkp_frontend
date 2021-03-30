@@ -1,0 +1,81 @@
+<div class="loader" *ngIf="!isLoaded"></div>
+<div class="container-fluid" *ngIf="isLoaded">
+  <div class="card table-card">
+    <span class="card-title">Список пользователей</span>
+    <div class="card-body">
+      <dx-data-grid
+        #grid
+        id="gridContainer"
+        [dataSource]="this.users"
+        [hoverStateEnabled]="true"
+        [showBorders]="true"
+        [selectedRowKeys]="[]">
+        <dxo-selection mode="single"></dxo-selection>
+        <dxi-column  caption="Имя пользователя" dataField="userName" dataType="string"></dxi-column>
+        <dxi-column caption="Email" dataField="email" dataType="string"></dxi-column>
+        <dxi-column caption="Телефон" dataField="phoneNumber" dataType="string"></dxi-column>
+      </dx-data-grid>
+    </div>
+  </div>
+  <div class="user-info" *ngIf="grid.selectedRowKeys.length">
+    <div class="card justify-content-start">
+      <span class="card-title">Пользователь</span>
+      <div class="card-body">
+        <p class="card-text"><b>Имя пользователя:</b>  {{grid.instance.getSelectedRowsData()[0].userName}}</p>
+        <p class="card-text"><b>Телефон:</b>  {{grid.instance.getSelectedRowsData()[0].phoneNumber}}</p>
+        <p class="card-text"><b>Email:</b>  {{grid.instance.getSelectedRowsData()[0].email}}</p>
+        <button type="button" class="btn btn-outline-danger align-self-start" (click)="deleteUser(grid.instance.getSelectedRowsData()[0])">Удалить пользователя</button>
+
+      </div>
+    </div>
+  </div>
+  <div class="add-user">
+    <div class="button-container text-center">
+      <button type="button" class="btn" [ngClass]="{'btn-outline-primary': !isAddUserVisible,
+                                                    'btn-outline-danger': isAddUserVisible }"
+                                                    (click)="isAddUserVisible = !isAddUserVisible">
+        {{!isAddUserVisible ? 'Добавить пользователя' : 'Закрыть вкладку'}}
+      </button>
+    </div>
+    <div class="card add-user-card" *ngIf="isAddUserVisible">
+      <span class="card-title">Добавление пользователя</span>
+      <div class="card-body">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <input type="text" placeholder="Имя пользователя" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': isFormSubmitted && form.username.errors }" />
+            <div *ngIf="isFormSubmitted && form.username.errors" class="invalid-feedback">
+              <div *ngIf="form.username.errors.required">cdВведите имя пользователя</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <input type="text" placeholder="Телефон"  formControlName="phone" class="form-control" [ngClass]="{ 'is-invalid': isFormSubmitted && form.password.errors }" />
+            <div *ngIf="isFormSubmitted && form.phone.errors" class="invalid-feedback">
+              <div *ngIf="form.password.errors.required">Введите телефон</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <input type="email" placeholder="Email"  formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': isFormSubmitted && form.password.errors }" />
+            <div *ngIf="isFormSubmitted && form.email.errors" class="invalid-feedback">
+              <div *ngIf="form.password.errors.required">Введите email</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <input type="password" placeholder="Пароль"  formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': isFormSubmitted && form.password.errors }" />
+            <div *ngIf="isFormSubmitted && form.password.errors" class="invalid-feedback">
+              <div *ngIf="form.password.errors.required">Введите пароль</div>
+            </div>
+          </div>
+          <div class="card-low d-flex justify-content-between">
+            <div class="button-container ">
+              <button [disabled]="isLoading" class="btn btn-primary ">
+                <span *ngIf="isLoading" class="spinner-border spinner-border-sm mr-1"></span>
+                Добавить пользователя
+              </button>
+            </div>
+          </div>
+          <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error.message}}</div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -19,6 +19,9 @@ import {DocumentAnalysisComponent} from './document-analysis/document-analysis.c
 import {UploadComponent} from './upload/upload.component';
 import {NgSelectModule} from '@ng-select/ng-select';
 import {JwtInterceptor} from './helpers/jwt.interceptor';
+import {ErrorInterceptor} from './helpers/error.interspector';
+import {AdminPanelComponent} from './admin-panel/admin-panel.component';
+import {DxDataGridModule} from 'devextreme-angular';
 
 @NgModule({
   declarations: [
@@ -31,17 +34,20 @@ import {JwtInterceptor} from './helpers/jwt.interceptor';
     DocumentAnalysisComponent,
     UploadComponent,
     FetchDataComponent,
+    AdminPanelComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
     HttpClientModule,
     FormsModule,
+    DxDataGridModule,
     InlineSVGModule.forRoot(),
     ClickOutsideModule,
     NgSelectModule,
     RouterModule.forRoot([
       {path: '', component: VersionComponent, pathMatch: 'full', canActivate: [AuthGuard]},
       {path: 'analysis', component: DocumentAnalysisComponent},
+      {path: 'admin', component: AdminPanelComponent,  canActivate: [AuthGuard]},
       {path: 'versions', component: VersionComponent},
       {path: 'login', component: LoginComponent},
       {path: 'counter', component: CounterComponent},
@@ -50,6 +56,7 @@ import {JwtInterceptor} from './helpers/jwt.interceptor';
     ReactiveFormsModule,
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
 
   ],

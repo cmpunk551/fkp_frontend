@@ -55,6 +55,11 @@ body {
   ;
 }
 
+.page-content-wrapper{
+  max-height: 100vh;
+  overflow-y: scroll;
+}
+
 #page-content-wrapper {
   min-width: 100vw;
 }
