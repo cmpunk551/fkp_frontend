@@ -1,0 +1,20 @@
+<div class="version-select dropdown">
+  <div (click)="showSelector()">
+    <span *ngIf="current_version" class="select-item">{{current_version.code}}</span>
+    <button class="btn dropdown-toggle"></button>
+    <p><small class="text-muted">{{current_version.description}}</small></p>
+
+  </div>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"  [ngClass]="{'show': toggleFlag}">
+    <ng-select class="dropdown-item"
+               [clearable]="false"
+               [searchable]="true"
+               [placeholder]="'поиск'"
+               [(ngModel)]="current_version"
+               (ngModelChange)="changeCurrentVersion($event)">
+      <ng-container *ngFor="let version of versions">
+        <ng-option [value]="version">{{version.code}}</ng-option>
+      </ng-container>
+    </ng-select>
+  </div>
+</div>

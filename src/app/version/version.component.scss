@@ -86,3 +86,7 @@
     max-height : 400px;
   }
 }
+::ng-deep #chart {
+  max-width: 95%;
+  overflow-y: auto;
+}

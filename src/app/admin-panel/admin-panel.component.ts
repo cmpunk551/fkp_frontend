@@ -47,7 +47,6 @@ export class AdminPanelComponent implements OnInit {
 
   public async getUsers() {
     await this.http.get<IUser[]>(environment.apiUrl + '/users').subscribe(response => {
-      console.log(response);
       this.users = response;
       this.isLoaded = true;
     });

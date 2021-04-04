@@ -1,0 +1,27 @@
+<div class="container-fluid justify-content-start" *ngIf="isLoaded">
+  <div class="card table-card">
+    <div class="card-body">
+      <span class="card-title">Финансовые лимиты</span>
+      <dx-chart
+        class="table"
+        id="chart"
+        title="Финансовые лимиты"
+        [dataSource]="this.versionLimits ">
+        <ng-container *ngFor=" let limit of versionLimits" >
+          <dxi-series
+            valueField="financeLimit"
+            type="bar"
+            name="{{limit.versionCode }}"
+            color="#0366d6">
+          </dxi-series>
+        </ng-container>
+        <dxo-common-series-settings
+          argumentField="year"
+          type="bar"
+          hoverMode="allArgumentPoints"
+          selectionMode="allArgumentPoints">
+        </dxo-common-series-settings>
+      </dx-chart>
+    </div>
+  </div>
+</div>

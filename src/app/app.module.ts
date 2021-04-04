@@ -21,7 +21,12 @@ import {NgSelectModule} from '@ng-select/ng-select';
 import {JwtInterceptor} from './helpers/jwt.interceptor';
 import {ErrorInterceptor} from './helpers/error.interspector';
 import {AdminPanelComponent} from './admin-panel/admin-panel.component';
-import {DxDataGridModule} from 'devextreme-angular';
+import {DxChartModule, DxDataGridModule} from 'devextreme-angular';
+import {VersionSelectorComponent} from './version-selector/version-selector.component';
+import {SpacecraftsComponent} from './spacecrafts/spacecrafts.component';
+import {TargetIndicatorsComponent} from './target-indicators/target-indicators.component';
+import {FinanceWorkPlacesComponent} from './finance-work-places/finance-work-places.component';
+import {FinanceLimitsComponent} from './finance-limits/finance-limits.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +38,11 @@ import {DxDataGridModule} from 'devextreme-angular';
     CounterComponent,
     DocumentAnalysisComponent,
     UploadComponent,
+    VersionSelectorComponent,
+    SpacecraftsComponent,
+    TargetIndicatorsComponent,
+    FinanceWorkPlacesComponent,
+    FinanceLimitsComponent,
     FetchDataComponent,
     AdminPanelComponent
   ],
@@ -41,6 +51,7 @@ import {DxDataGridModule} from 'devextreme-angular';
     HttpClientModule,
     FormsModule,
     DxDataGridModule,
+    DxChartModule,
     InlineSVGModule.forRoot(),
     ClickOutsideModule,
     NgSelectModule,
@@ -49,6 +60,10 @@ import {DxDataGridModule} from 'devextreme-angular';
       {path: 'analysis', component: DocumentAnalysisComponent},
       {path: 'admin', component: AdminPanelComponent,  canActivate: [AuthGuard]},
       {path: 'versions', component: VersionComponent},
+      {path: 'spacecrafts', component: SpacecraftsComponent},
+      {path: 'targetIndicators', component: TargetIndicatorsComponent},
+      {path: 'financeWorkPlaces', component: FinanceWorkPlacesComponent},
+      {path: 'financeLimits', component: FinanceLimitsComponent},
       {path: 'login', component: LoginComponent},
       {path: 'counter', component: CounterComponent},
       {path: 'fetch-data', component: FetchDataComponent},

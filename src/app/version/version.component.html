@@ -1,26 +1,11 @@
 <div class="loader" *ngIf="!isLoaded"></div>
-<div class="container-fluid justify-content-start" *ngIf="isLoaded">
-  <ng-container class="card" *ngIf="current_version">
-    <div class="version-select dropdown">
-      <div (click)="showSelector()">
-        <span *ngIf="current_version" class="select-item">{{current_version.code}}</span>
-        <button class="btn dropdown-toggle"></button>
-        <p><small class="text-muted">{{current_version.description}}</small></p>
 
-      </div>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"  [ngClass]="{'show': toggleFlag}">
-        <ng-select class="dropdown-item"
-                   [clearable]="false"
-                   [searchable]="true"
-                   [placeholder]="'поиск'"
-                   [(ngModel)]="current_version"
-                   (ngModelChange)="changeCurrentVersion()">
-          <ng-container *ngFor="let version of versions">
-            <ng-option [value]="version">{{version.code}}</ng-option>
-          </ng-container>
-        </ng-select>
-      </div>
-    </div>
+<div class="container-fluid justify-content-start" *ngIf="isLoaded">
+  <ng-container class="card">
+    <app-version-selector
+      [versions]="versions"
+      (versionSelected)="changeCurrentVersion($event)"
+    ></app-version-selector>
     <div class="info-cards row" *ngIf="current_version">
       <div class="card col-3 flex-row flex-wrap ">
         <div class="card-header" [inlineSVG]="'./assets/icons/rub.svg'"  [setSVGAttributes]="{'width' : '36px', 'height' : '36px'}"></div>
@@ -53,12 +38,33 @@
     </div>
     <div class="card table-card">
       <div class="card-body">
+        <span class="card-title">Финансовые лимиты</span>
+        <dx-chart
+          class="table"
+          id="chart"
+          title="Финансовые лимиты"
+          [dataSource]="this.current_version.financeLimits ">
+          <dxi-series
+            argumentField="year"
+            valueField="financeLimit"
+            type="bar"
+            name="{{current_version.code}}"
+            color="#0366d6">
+          </dxi-series>
+        </dx-chart>
+      </div>
+    </div>
+    <div class="card table-card">
+      <div class="card-body">
         <span class="card-title">Цели</span>
-        <dx-data-grid class="table"
+        <dx-data-grid class="chart"
                       id="goalsContainer"
                       [dataSource]="this.current_version.goals"
                       [hoverStateEnabled]="true"
                       [allowColumnReordering]="true">
+          <dxo-header-filter [visible]="true"></dxo-header-filter>
+          <dxo-filter-row [visible]="true"></dxo-filter-row>
+          <dxo-column-chooser [mode]="'select'" [enabled]="true"></dxo-column-chooser>
           <dxi-column  caption="Тип" dataField="type" dataType="string"></dxi-column>
           <dxi-column caption="Наименование" dataField="name" dataType="string"></dxi-column>
           <dxo-search-panel [placeholder]="'Поиск'" [visible]="true"></dxo-search-panel>
@@ -77,6 +83,9 @@
           [hoverStateEnabled]="true"
           [allowColumnReordering]="true"
           [showBorders]="true">
+          <dxo-header-filter [visible]="true"></dxo-header-filter>
+          <dxo-filter-row [visible]="true"></dxo-filter-row>
+          <dxo-column-chooser [mode]="'select'" [enabled]="true"></dxo-column-chooser>
           <dxi-column  caption="Шифр" dataField="code" dataType="string"></dxi-column>
           <dxi-column caption="Наименование" dataField="name" dataType="string"></dxi-column>
           <dxi-column caption="Тип проекта" dataField="systemName" dataType="string"></dxi-column>
@@ -92,30 +101,35 @@
       </div>
     </div>
 
-    <div class="card table-card">
-      <div class="card-body">
-        <span class="card-title">Мероприятия</span>
-        <dx-data-grid class="table"
-                      id="workEventsContainer"
-                      [dataSource]="this.current_version.work_events"
-                      [hoverStateEnabled]="true"
-                      [remoteOperations]="false"
-                      [allowColumnReordering]="true"
-                      [showBorders]="true">
-          <dxi-column  caption="Шифр" dataField="name" dataType="string"></dxi-column>
-          <dxi-column caption="Наименование" dataField="name" dataType="string"></dxi-column>
-          <dxi-column caption="Раздел Программы" dataField="sectionIdCode" dataType="string"></dxi-column>
-          <dxi-column caption="Начало" dataField="dateFrom" dataType="string"></dxi-column>
-          <dxi-column caption="Окончание" dataField="dateTo" dataType="string"></dxi-column>
-          <dxi-column caption="Проект" dataField="projectIdCode" dataType="string"></dxi-column>
-          <dxi-column caption="Выполнено" dataField="isDoneValue" dataType="string"></dxi-column>
-          <dxo-search-panel [placeholder]="'Поиск'" [visible]="true"></dxo-search-panel>
-          <dxo-group-panel [emptyPanelText]="'Группировать по полю'" [allowColumnDragging]="true" [visible]="true"></dxo-group-panel>
-          <dxo-grouping [allowCollapsing]="true" [autoExpandAll]="true"></dxo-grouping>
-          <dxo-scrolling mode="infinite"></dxo-scrolling>
-        </dx-data-grid>
-      </div>
-    </div>
+
+
+<!--    <div class="card table-card">-->
+<!--      <div class="card-body">-->
+<!--        <span class="card-title">Мероприятия</span>-->
+<!--        <dx-data-grid class="table"-->
+<!--                      id="workEventsContainer"-->
+<!--                      [dataSource]="this.current_version.work_events"-->
+<!--                      [hoverStateEnabled]="true"-->
+<!--                      [remoteOperations]="false"-->
+<!--                      [allowColumnReordering]="true"-->
+<!--                      [showBorders]="true">-->
+<!--          <dxo-header-filter [visible]="true"></dxo-header-filter>-->
+<!--          <dxo-filter-row [visible]="true"></dxo-filter-row>-->
+<!--          <dxo-column-chooser [enabled]="true"></dxo-column-chooser>-->
+<!--          <dxi-column  caption="Шифр" dataField="name" dataType="string"></dxi-column>-->
+<!--          <dxi-column caption="Наименование" dataField="name" dataType="string"></dxi-column>-->
+<!--          <dxi-column caption="Раздел Программы" dataField="sectionIdCode" dataType="string"></dxi-column>-->
+<!--          <dxi-column caption="Начало" dataField="dateFrom" dataType="string"></dxi-column>-->
+<!--          <dxi-column caption="Окончание" dataField="dateTo" dataType="string"></dxi-column>-->
+<!--          <dxi-column caption="Проект" dataField="projectIdCode" dataType="string"></dxi-column>-->
+<!--          <dxi-column caption="Выполнено" dataField="isDoneValue" dataType="string"></dxi-column>-->
+<!--          <dxo-search-panel [placeholder]="'Поиск'" [visible]="true"></dxo-search-panel>-->
+<!--          <dxo-group-panel [emptyPanelText]="'Группировать по полю'" [allowColumnDragging]="true" [visible]="true"></dxo-group-panel>-->
+<!--          <dxo-grouping [allowCollapsing]="true" [autoExpandAll]="true"></dxo-grouping>-->
+<!--          <dxo-scrolling mode="infinite"></dxo-scrolling>-->
+<!--        </dx-data-grid>-->
+<!--      </div>-->
+<!--    </div>-->
   </ng-container>
 </div>
 

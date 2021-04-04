@@ -1,0 +1,33 @@
+<div class="container-fluid justify-content-start" *ngIf="isLoaded">
+  <app-version-selector
+    [versions]="versions"
+    (versionSelected)="changeCurrentVersion($event)"
+  ></app-version-selector>
+  <div class="card table-card">
+    <div class="card-body">
+      <span class="card-title">Финансирование</span>
+      <dx-data-grid class="table"
+                    id="goalsContainer"
+                    [dataSource]="this.current_version.financeWorkPlaces"
+                    [hoverStateEnabled]="true"
+                    [allowColumnReordering]="true">
+        <dxo-header-filter [visible]="true"></dxo-header-filter>
+        <dxo-filter-row [visible]="true"></dxo-filter-row>
+        <dxo-column-chooser [mode]="'select'" [enabled]="true"></dxo-column-chooser>
+        <dxi-column caption="Наименование мероприятия" dataField="наименованиеМероприятия" dataType="string"></dxi-column>
+        <dxi-column caption="Значение финансового показателя" dataField="значениеФинансовогоПоказателя" dataType="string"></dxi-column>
+        <dxi-column caption="Вид финансирования" dataField="видФинансирования" dataType="string"></dxi-column>
+        <dxi-column caption="Шифр проекта" dataField="шифрПроекта" dataType="string"></dxi-column>
+        <dxi-column caption="Исполнитель" dataField="исполнитель" dataType="string"></dxi-column>
+        <dxi-column caption="Раздел" dataField="раздел" dataType="string"></dxi-column>
+        <dxi-column caption="Подраздел" dataField="подраздел" dataType="string"></dxi-column>
+        <dxi-column caption="Статья" dataField="статья" dataType="string"></dxi-column>
+        <dxi-column caption="Показатель финанасирования по годам" dataField="priority" dataType="показательФинансированияПоГодам"></dxi-column>
+        <dxo-search-panel [placeholder]="'Поиск'" [visible]="true"></dxo-search-panel>
+        <dxo-group-panel [emptyPanelText]="'Группировать по полю'" [allowColumnDragging]="true" [visible]="true"></dxo-group-panel>
+        <dxo-grouping texts="true: 'kek'" [autoExpandAll]="true"></dxo-grouping>
+        <dxo-scrolling mode="infinite"></dxo-scrolling>
+      </dx-data-grid>
+    </div>
+  </div>
+</div>
