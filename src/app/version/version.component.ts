@@ -3,10 +3,12 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {environment} from '../../environments/environment';
 import {GeneralInfo} from '../models/generalInfo';
 import {Project} from '../models/project';
-import {Goal} from '../models/goal';
+import {GoalObjective} from '../models/goalObjective';
 import {WorkEvent} from '../models/workEvent';
 import {Version} from '../models/version';
 import {FinanceLimit} from '../models/financeLimit';
+import {Finance} from '../models/finance';
+import {FinanceWorkplace} from '../models/financeWorkplace';
 
 @Component({
   selector: 'app-version',
@@ -17,8 +19,9 @@ export class VersionComponent implements OnInit {
 
   public versions: Version[];
   public current_version: Version;
-  public toggleFlag = false;
+  public finance_data_source: any;
   public isLoaded = false;
+  public isInfoLoaded = false;
 
   constructor( public http: HttpClient, @Inject('BASE_URL') public baseUrl: string) {
   }
@@ -38,24 +41,19 @@ export class VersionComponent implements OnInit {
   public async getGeneralInfo() {
     await this.http.get<GeneralInfo>( environment.apiUrl + '/versions/getGeneralInfo/' + this.current_version.rid).subscribe(response => {
       this.current_version.generalInfo = response;
+      this.isInfoLoaded = true;
     });
   }
 
-  public async getGoals() {
-    await this.http.get<Goal[]>(environment.apiUrl + '/versions/getGoals/' + this.current_version.rid).subscribe(response => {
-      this.current_version.goals = response;
-      console.log(response);
+  public async getGoalsObjectives() {
+    await this.http.get<GoalObjective[]>(environment.apiUrl + '/versions/getGoalsAndObjectives/' + this.current_version.rid)
+      .subscribe(response => {
+      this.current_version.goalsObjectives = response;
     });
   }
   public async getProjects() {
     await this.http.get<Project[]>(environment.apiUrl + '/Projects/' + this.current_version.rid).subscribe(response => {
       this.current_version.projectProjects = response;
-    });
-  }
-  public async getWorkEvents() {
-    await this.http.get<WorkEvent[]>(environment.apiUrl + '/WorkEvent/getWorks/' + this.current_version.rid).subscribe(response => {
-      this.current_version.work_events  = response;
-      this.isLoaded = true;
     });
   }
   public async getFinanceLimitsByYear() {
@@ -65,14 +63,51 @@ export class VersionComponent implements OnInit {
       });
   }
 
+  public async getFinancesByYear() {
+    await this.http.get<Finance[]>(environment.apiUrl + '/finance/getFinancesByYear/' + this.current_version.rid)
+      .subscribe( response => {
+        this.current_version.finances = response;
+      });
+  }
+  public async getFinanceWorkPlaces() {
+    await this.http.get<FinanceWorkplace[]>(environment.apiUrl + '/finance/getFinanceWorkPlaces/' + this.current_version.rid)
+      .subscribe( response => {
+        this.current_version.financeWorkPlaces = response;
+        this.finance_data_source = {
+          fields: [{
+            caption: 'Наименование мероприятия ',
+            dataField: 'наименованиеМероприятия',
+            area: 'row',
+          },
+          {
+            caption: 'Вид финансирования',
+            dataField: 'видФинансирования',
+            area: 'row'
+          },
+          {
+            dataField: 'показательФинансированияПоГодам',
+            area: 'column'
+          }, {
+            caption: 'Sales',
+            dataField: 'значениеФинансовогоПоказателя',
+            dataType: 'number',
+            summaryType: 'sum',
+            area: 'data'
+          }],
+          store: this.current_version.financeWorkPlaces
+        };
+      });
+  }
   public async changeCurrentVersion(version: Version) {
     this.isLoaded = false;
+    this.isInfoLoaded = false;
     this.current_version = version;
     this.getGeneralInfo();
     this.getFinanceLimitsByYear();
-    this.getGoals();
+    this.getFinancesByYear();
+    this.getFinanceWorkPlaces();
+    this.getGoalsObjectives();
     this.getProjects();
-    this.getWorkEvents();
     this.isLoaded = true;
   }
 

@@ -1,135 +1,135 @@
 <div class="loader" *ngIf="!isLoaded"></div>
-
 <div class="container-fluid justify-content-start" *ngIf="isLoaded">
   <ng-container class="card">
     <app-version-selector
       [versions]="versions"
       (versionSelected)="changeCurrentVersion($event)"
     ></app-version-selector>
-    <div class="info-cards row" *ngIf="current_version">
-      <div class="card col-3 flex-row flex-wrap ">
-        <div class="card-header" [inlineSVG]="'./assets/icons/rub.svg'"  [setSVGAttributes]="{'width' : '36px', 'height' : '36px'}"></div>
-        <div class="card-block">
-          <span class="card-title">ФИНАНСИРОВАНИЕ</span>
-          <h4 class="card-text"> {{ current_version.generalInfo.totalFinanceLimit}}млн</h4>
+    <div class="loader" *ngIf="!isInfoLoaded"></div>
+    <ng-container *ngIf="isInfoLoaded">
+      <div class="info-cards row" *ngIf="current_version">
+        <div class="card col-6 flex-row flex-wrap ">
+          <div class="card-header" [inlineSVG]="'./assets/icons/rub.svg'"  [setSVGAttributes]="{'width' : '36px', 'height' : '36px'}"></div>
+          <div class="card-block">
+            <span class="card-title">ФИНАНСИРОВАНИЕ</span>
+            <h4 class="card-text"> {{ current_version.generalInfo.totalFinanceBud}}/{{current_version.generalInfo.totalFinanceNoBud}}млн</h4>
+          </div>
+        </div>
+        <div class="card col-3 flex-row flex-wrap ">
+          <div class="card-header" [inlineSVG]="'./assets/icons/event.svg'" [setSVGAttributes]="{'width' : '36px', 'height' : '36px'}"></div>
+          <div class="card-block">
+            <span class="card-title">МЕРОПРИЯТИЯ</span>
+            <h4 class="card-text">{{current_version.generalInfo.totalWorks}}/{{current_version.generalInfo.totalCompletedWorks}} </h4>
+          </div>
+        </div>
+        <div class="card col-3 flex-row flex-wrap ">
+          <div class="card-header" [inlineSVG]="'./assets/icons/launch.svg'" [setSVGAttributes]="{'width' : '36px', 'height' : '36px'}"></div>
+          <div class="card-block">
+            <span class="card-title">ЗАПУСКИ</span>
+            <p class="card-text h4"> {{current_version.generalInfo.totalPlannedLaunches}}/{{current_version.generalInfo.totalCompletedLaunches}}</p>
+          </div>
         </div>
       </div>
-      <div class="card col-3 flex-row flex-wrap ">
-        <div class="card-header" [inlineSVG]="'./assets/icons/project.svg'" [setSVGAttributes]="{'width' : '36px', 'height' : '36px'}"></div>
-        <div class="card-block">
-          <span class="card-title">ПРОЕКТОВ</span>
-          <h4 class="card-text"> {{current_version.generalInfo.totalProjects}}</h4>
+      <div class="card table-card">
+        <div class="card-body">
+          <span class="card-title">Цели и задачи</span>
+          <dx-tree-list class="table"
+            id="employees"
+            [dataSource]="current_version.goalsObjectives"
+            keyExpr="id"
+            parentIdExpr="parentId"
+            [allowColumnResizing]="true"
+            [allowColumnReordering]="true"
+            [showRowLines]="true"
+            [showBorders]="true"
+            [expandedRowKeys]="[1]">
+            <dxi-column dataField="name" caption="Наименование"></dxi-column>
+            <dxi-column dataField="type" caption="Тип"></dxi-column>
+            <dxo-search-panel [placeholder]="'Поиск'" [visible]="true"></dxo-search-panel>
+          </dx-tree-list>
         </div>
       </div>
-      <div class="card col-3 flex-row flex-wrap ">
-        <div class="card-header" [inlineSVG]="'./assets/icons/event.svg'" [setSVGAttributes]="{'width' : '36px', 'height' : '36px'}"></div>
-        <div class="card-block">
-          <span class="card-title">МЕРОПРИЯТИЯ</span>
-          <h4 class="card-text">{{current_version.generalInfo.totalWorks}} </h4>
+      <div class="card table-card">
+        <div class="card-body">
+          <span class="card-title">Проекты</span>
+          <dx-data-grid class="table"
+                        id="projectContainer"
+                        [dataSource]="this.current_version.projectProjects"
+                        [hoverStateEnabled]="true"
+                        [allowColumnReordering]="true"
+                        [showBorders]="true">
+            <dxo-header-filter [visible]="true"></dxo-header-filter>
+            <dxo-column-chooser [mode]="'select'" [enabled]="true"></dxo-column-chooser>
+            <dxi-column  caption="Шифр" dataField="code" dataType="string"></dxi-column>
+            <dxi-column caption="Наименование" dataField="name" dataType="string"></dxi-column>
+            <dxi-column caption="Тип проекта" dataField="systemName" dataType="string"></dxi-column>
+            <dxi-column caption="Стоимость" dataField="cost" dataType="string"></dxi-column>
+            <dxi-column caption="Освоено" dataField="mastered" dataType="string"></dxi-column>
+            <dxi-column caption="Остаток" dataField="remains" dataType="string"></dxi-column>
+            <dxo-search-panel [placeholder]="'Поиск'" [visible]="true"></dxo-search-panel>
+            <dxo-group-panel [emptyPanelText]="'Группировать по полю'" [allowColumnDragging]="true" [visible]="true"></dxo-group-panel>
+            <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
+            <dxo-scrolling mode="virtual"></dxo-scrolling>
+          </dx-data-grid>
         </div>
       </div>
-      <div class="card col-3 flex-row flex-wrap ">
-        <div class="card-header" [inlineSVG]="'./assets/icons/launch.svg'" [setSVGAttributes]="{'width' : '36px', 'height' : '36px'}"></div>
-        <div class="card-block">
-          <span class="card-title">ЗАПУСКИ</span>
-          <p class="card-text h4"> {{current_version.generalInfo.totalLaunches}}</p>
+      <div class="card table-card">
+        <div class="card-body chart-card">
+          <span class="card-title">Финансовые лимиты</span>
+          <dx-chart
+            class="chart"
+            id="chart"
+            title="Финансовые лимиты"
+            [dataSource]="this.current_version.financeLimits ">
+            <dxi-series
+              argumentField="year"
+              valueField="financeLimit"
+              type="bar"
+              name="{{current_version.code}}"
+              color="#0366d6">
+            </dxi-series>
+          </dx-chart>
         </div>
       </div>
-    </div>
-    <div class="card table-card">
-      <div class="card-body">
-        <span class="card-title">Финансовые лимиты</span>
-        <dx-chart
-          class="table"
-          id="chart"
-          title="Финансовые лимиты"
-          [dataSource]="this.current_version.financeLimits ">
-          <dxi-series
-            argumentField="year"
-            valueField="financeLimit"
-            type="bar"
-            name="{{current_version.code}}"
-            color="#0366d6">
-          </dxi-series>
-        </dx-chart>
+      <div class="card table-card">
+        <div class="card-body chart-card">
+          <span class="card-title">Финансирование Бюджет/Внебюджет</span>
+          <dx-chart
+            class="chart"
+            id="finance-chart"
+            title="Финансирование Бюджет/Внебюджет"
+            [dataSource]="current_version.finances">
+            <dxi-series valueField="totalFinanceBud" name="Бюджет"></dxi-series>
+            <dxi-series valueField="totalFinanceNoBud" name="Внебюджет"></dxi-series>
+            <dxi-value-axis position="right">
+              <dxo-title text="миллионы"></dxo-title>
+            </dxi-value-axis>
+            <dxo-common-series-settings
+              argumentField="year"
+              type="stackedBar">
+            </dxo-common-series-settings>
+          </dx-chart>
+        </div>
       </div>
-    </div>
-    <div class="card table-card">
-      <div class="card-body">
-        <span class="card-title">Цели</span>
-        <dx-data-grid class="chart"
-                      id="goalsContainer"
-                      [dataSource]="this.current_version.goals"
-                      [hoverStateEnabled]="true"
-                      [allowColumnReordering]="true">
-          <dxo-header-filter [visible]="true"></dxo-header-filter>
-          <dxo-filter-row [visible]="true"></dxo-filter-row>
-          <dxo-column-chooser [mode]="'select'" [enabled]="true"></dxo-column-chooser>
-          <dxi-column  caption="Тип" dataField="type" dataType="string"></dxi-column>
-          <dxi-column caption="Наименование" dataField="name" dataType="string"></dxi-column>
-          <dxo-search-panel [placeholder]="'Поиск'" [visible]="true"></dxo-search-panel>
-          <dxo-group-panel [emptyPanelText]="'Группировать по полю'" [allowColumnDragging]="true" [visible]="true"></dxo-group-panel>
-          <dxo-grouping texts="true: 'kek'" [autoExpandAll]="true"></dxo-grouping>
-          <dxo-scrolling mode="infinite"></dxo-scrolling>
-        </dx-data-grid>
+      <div class="card table-card">
+        <div class="card-body">
+          <span class="card-title">Финансирование</span>
+          <dx-pivot-grid class="table" id="finance"
+                         [allowSortingBySummary]="true"
+                         [allowSorting]="true"
+                         [allowFiltering]="true"
+                         [allowExpandAll]="true"
+                         [height]="440"
+                         [showBorders]="true"
+                         [dataSource]="finance_data_source">
+            <dxo-field-chooser
+              [allowSearch]="true"
+              [enabled]="true">
+            </dxo-field-chooser>          </dx-pivot-grid>
+        </div>
       </div>
-    </div>
-    <div class="card table-card">
-      <div class="card-body">
-        <span class="card-title">Проекты</span>
-        <dx-data-grid class="table"
-          id="projectContainer"
-          [dataSource]="this.current_version.projectProjects"
-          [hoverStateEnabled]="true"
-          [allowColumnReordering]="true"
-          [showBorders]="true">
-          <dxo-header-filter [visible]="true"></dxo-header-filter>
-          <dxo-filter-row [visible]="true"></dxo-filter-row>
-          <dxo-column-chooser [mode]="'select'" [enabled]="true"></dxo-column-chooser>
-          <dxi-column  caption="Шифр" dataField="code" dataType="string"></dxi-column>
-          <dxi-column caption="Наименование" dataField="name" dataType="string"></dxi-column>
-          <dxi-column caption="Тип проекта" dataField="systemName" dataType="string"></dxi-column>
-          <dxi-column caption="Приоритет" dataField="priority" dataType="string"></dxi-column>
-          <dxi-column caption="Стоимость" dataField="cost" dataType="string"></dxi-column>
-          <dxi-column caption="Освоено" dataField="mastered" dataType="string"></dxi-column>
-          <dxi-column caption="Остаток" dataField="remains" dataType="string"></dxi-column>
-          <dxo-search-panel [placeholder]="'Поиск'" [visible]="true"></dxo-search-panel>
-          <dxo-group-panel [emptyPanelText]="'Группировать по полю'" [allowColumnDragging]="true" [visible]="true"></dxo-group-panel>
-          <dxo-grouping texts="true: 'kek'" [autoExpandAll]="true"></dxo-grouping>
-          <dxo-scrolling mode="infinite"></dxo-scrolling>
-        </dx-data-grid>
-      </div>
-    </div>
+    </ng-container>
 
-
-
-<!--    <div class="card table-card">-->
-<!--      <div class="card-body">-->
-<!--        <span class="card-title">Мероприятия</span>-->
-<!--        <dx-data-grid class="table"-->
-<!--                      id="workEventsContainer"-->
-<!--                      [dataSource]="this.current_version.work_events"-->
-<!--                      [hoverStateEnabled]="true"-->
-<!--                      [remoteOperations]="false"-->
-<!--                      [allowColumnReordering]="true"-->
-<!--                      [showBorders]="true">-->
-<!--          <dxo-header-filter [visible]="true"></dxo-header-filter>-->
-<!--          <dxo-filter-row [visible]="true"></dxo-filter-row>-->
-<!--          <dxo-column-chooser [enabled]="true"></dxo-column-chooser>-->
-<!--          <dxi-column  caption="Шифр" dataField="name" dataType="string"></dxi-column>-->
-<!--          <dxi-column caption="Наименование" dataField="name" dataType="string"></dxi-column>-->
-<!--          <dxi-column caption="Раздел Программы" dataField="sectionIdCode" dataType="string"></dxi-column>-->
-<!--          <dxi-column caption="Начало" dataField="dateFrom" dataType="string"></dxi-column>-->
-<!--          <dxi-column caption="Окончание" dataField="dateTo" dataType="string"></dxi-column>-->
-<!--          <dxi-column caption="Проект" dataField="projectIdCode" dataType="string"></dxi-column>-->
-<!--          <dxi-column caption="Выполнено" dataField="isDoneValue" dataType="string"></dxi-column>-->
-<!--          <dxo-search-panel [placeholder]="'Поиск'" [visible]="true"></dxo-search-panel>-->
-<!--          <dxo-group-panel [emptyPanelText]="'Группировать по полю'" [allowColumnDragging]="true" [visible]="true"></dxo-group-panel>-->
-<!--          <dxo-grouping [allowCollapsing]="true" [autoExpandAll]="true"></dxo-grouping>-->
-<!--          <dxo-scrolling mode="infinite"></dxo-scrolling>-->
-<!--        </dx-data-grid>-->
-<!--      </div>-->
-<!--    </div>-->
   </ng-container>
 </div>
 

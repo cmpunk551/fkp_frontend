@@ -1,10 +1,12 @@
 import {GeneralInfo} from './generalInfo';
 import {Project} from './project';
-import {Goal} from './goal';
+import { GoalObjective} from './goalObjective';
 import {WorkEvent} from './workEvent';
 import {Spacecraft} from './spacecraft';
 import {TargetIndicator} from './targetIndicator';
 import {FinanceLimit} from './financeLimit';
+import {Finance} from './finance';
+import {FinanceWorkplace} from './financeWorkplace';
 
 export class Version {
   public rid: string;
@@ -15,10 +17,11 @@ export class Version {
   public priority: string;
   public description: string;
   public generalInfo: GeneralInfo;
-  public goals: Goal[];
+  public goalsObjectives: GoalObjective[];
   public work_events: WorkEvent[];
   public spacecrafts: Spacecraft[];
   public targetIndicators: TargetIndicator[];
-  public financeWorkPlaces: any;
+  public financeWorkPlaces: FinanceWorkplace[];
   public financeLimits: FinanceLimit[];
+  public finances: Finance[];
 }

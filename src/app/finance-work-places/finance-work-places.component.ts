@@ -3,6 +3,7 @@ import {Version} from '../models/version';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {TargetIndicator} from '../models/targetIndicator';
+import {FinanceWorkplace} from '../models/financeWorkplace';
 
 @Component({
   selector: 'app-finance-work-places',
@@ -27,7 +28,7 @@ export class FinanceWorkPlacesComponent implements OnInit {
   }
 
   public async getFinanceWorkPlaces() {
-    await this.http.get<any[]>(environment.apiUrl + '/finance/getFinanceWorkPlaces/' + this.current_version.rid)
+    await this.http.get<FinanceWorkplace[]>(environment.apiUrl + '/finance/getFinanceWorkPlaces/' + this.current_version.rid)
       .subscribe( response => {
         this.current_version.financeWorkPlaces = response;
       });

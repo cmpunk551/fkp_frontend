@@ -21,12 +21,17 @@ import {NgSelectModule} from '@ng-select/ng-select';
 import {JwtInterceptor} from './helpers/jwt.interceptor';
 import {ErrorInterceptor} from './helpers/error.interspector';
 import {AdminPanelComponent} from './admin-panel/admin-panel.component';
-import {DxChartModule, DxDataGridModule} from 'devextreme-angular';
+import {DxChartModule, DxDataGridModule, DxPivotGridModule, DxSliderModule, DxTreeListModule} from 'devextreme-angular';
 import {VersionSelectorComponent} from './version-selector/version-selector.component';
 import {SpacecraftsComponent} from './spacecrafts/spacecrafts.component';
 import {TargetIndicatorsComponent} from './target-indicators/target-indicators.component';
 import {FinanceWorkPlacesComponent} from './finance-work-places/finance-work-places.component';
 import {FinanceLimitsComponent} from './finance-limits/finance-limits.component';
+import {AnalyticsComponent} from './analytics/analytics.component';
+import {StructureAnalysisComponent} from './structure-analysis/structure-analysis.component';
+import {PithyAnalysisComponent} from './pithy-analysis/pithy-analysis.component';
+import {WorkInProgressComponent} from './work-in-progress/work-in-progress.component';
+import {WorkEventsComponent} from './work-events/work-events.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +49,11 @@ import {FinanceLimitsComponent} from './finance-limits/finance-limits.component'
     FinanceWorkPlacesComponent,
     FinanceLimitsComponent,
     FetchDataComponent,
+    AnalyticsComponent,
+    PithyAnalysisComponent,
+    WorkInProgressComponent,
+    WorkEventsComponent,
+    StructureAnalysisComponent,
     AdminPanelComponent
   ],
   imports: [
@@ -52,12 +62,20 @@ import {FinanceLimitsComponent} from './finance-limits/finance-limits.component'
     FormsModule,
     DxDataGridModule,
     DxChartModule,
+    DxPivotGridModule,
+    DxSliderModule,
+    DxTreeListModule,
     InlineSVGModule.forRoot(),
     ClickOutsideModule,
     NgSelectModule,
     RouterModule.forRoot([
       {path: '', component: VersionComponent, pathMatch: 'full', canActivate: [AuthGuard]},
       {path: 'analysis', component: DocumentAnalysisComponent},
+      {path: 'analytics', component: AnalyticsComponent},
+      {path: 'analytics/structure', component: StructureAnalysisComponent},
+      {path: 'analytics/pithy', component: PithyAnalysisComponent},
+      {path: 'work', component: WorkInProgressComponent},
+      {path: 'work-events', component: WorkEventsComponent},
       {path: 'admin', component: AdminPanelComponent,  canActivate: [AuthGuard]},
       {path: 'versions', component: VersionComponent},
       {path: 'spacecrafts', component: SpacecraftsComponent},

@@ -1,0 +1,94 @@
+<div class="loader" *ngIf="!isLoaded"></div>
+<div class="container-fluid justify-content-start" *ngIf="isLoaded">
+  <h3>Общая информация</h3>
+  <div class="card table-card">
+    <div class="card-body">
+      <span class="card-title">Задачи</span>
+      <dx-data-grid class="table"
+                    [dataSource]="this.goals"
+                    [hoverStateEnabled]="true"
+                    [allowColumnReordering]="true"
+                    [showBorders]="true">
+        <dxo-header-filter [visible]="true"></dxo-header-filter>
+        <dxo-column-chooser [mode]="'select'" [enabled]="true"></dxo-column-chooser>
+        <dxi-column  caption="Версия программы" dataField="versionCode" dataType="string"></dxi-column>
+        <dxi-column caption="Задачи (кол-во)" dataField="totalObjectives" dataType="string"></dxi-column>
+        <dxo-search-panel [placeholder]="'Поиск'" [visible]="true"></dxo-search-panel>
+        <dxo-group-panel [emptyPanelText]="'Группировать по полю'" [allowColumnDragging]="true" [visible]="true"></dxo-group-panel>
+        <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
+        <dxo-scrolling mode="virtual"></dxo-scrolling>
+      </dx-data-grid>
+    </div>
+  </div>
+  <div class="card table-card">
+    <div class="card-body">
+      <span class="card-title">Мероприятия</span>
+      <dx-data-grid class="table"
+                    [dataSource]="this.workEvents"
+                    [hoverStateEnabled]="true"
+                    [allowColumnReordering]="true"
+                    [showBorders]="true">
+        <dxo-header-filter [visible]="true"></dxo-header-filter>
+        <dxo-column-chooser [mode]="'select'" [enabled]="true"></dxo-column-chooser>
+        <dxi-column  caption="Версия программы" dataField="versionCode" dataType="string"></dxi-column>
+        <dxi-column caption="Мероприятия(кол-во)" dataField="totalWorks" dataType="string"></dxi-column>
+        <dxi-column caption="Мероприятий выполнено" dataField="totalCompletedWorks" dataType="string"></dxi-column>
+        <dxi-column caption="Мероприятий не начато" dataField="totalNotStartedWorks" dataType="string"></dxi-column>
+        <dxo-search-panel [placeholder]="'Поиск'" [visible]="true"></dxo-search-panel>
+        <dxo-group-panel [emptyPanelText]="'Группировать по полю'" [allowColumnDragging]="true" [visible]="true"></dxo-group-panel>
+        <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
+        <dxo-scrolling mode="virtual"></dxo-scrolling>
+      </dx-data-grid>
+    </div>
+  </div>
+  <div class="card table-card">
+    <div class="card-body">
+      <span class="card-title">Финансирование</span>
+      <dx-data-grid class="table"
+                    id="projectContainer"
+                    [dataSource]="this.finances"
+                    [hoverStateEnabled]="true"
+                    [allowColumnReordering]="true"
+                    [showBorders]="true">
+        <dxo-header-filter [visible]="true"></dxo-header-filter>
+        <dxo-column-chooser [mode]="'select'" [enabled]="true"></dxo-column-chooser>
+        <dxi-column  caption="Версия программы" dataField="versionCode" dataType="string"></dxi-column>
+        <dxi-column caption="Финансирование" dataField="totalFinance" dataType="string"></dxi-column>
+        <dxi-column caption="Бюджет" dataField="totalFinanceBud" dataType="string"></dxi-column>
+        <dxi-column caption="Внебюджет" dataField="totalFinanceNuBud" dataType="string"></dxi-column>
+        <dxi-column caption="Финансовые лимиты" dataField="totalFinanceLimit" dataType="string"></dxi-column>
+        <dxo-search-panel [placeholder]="'Поиск'" [visible]="true"></dxo-search-panel>
+        <dxo-group-panel [emptyPanelText]="'Группировать по полю'" [allowColumnDragging]="true" [visible]="true"></dxo-group-panel>
+        <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
+        <dxo-scrolling mode="virtual"></dxo-scrolling>
+      </dx-data-grid>
+    </div>
+  </div>
+  <div class="card table-card">
+    <div class="card-body">
+      <span class="card-title">Финансовые лимиты</span>
+      <dx-chart
+        id="chart"
+        class="chart"
+        title="Финансовые лимиты"
+        [dataSource]="this.limits">
+        <dxi-series valueField="y2016" name="2016"></dxi-series>
+        <dxi-series valueField="y2017" name="2017"></dxi-series>
+        <dxi-series valueField="y2018" name="2018"></dxi-series>
+        <dxi-series valueField="y2019" name="2019"></dxi-series>
+        <dxi-series valueField="y2020" name="2020"></dxi-series>
+        <dxi-series valueField="y2021" name="2021"></dxi-series>
+        <dxi-series valueField="y2022" name="2022"></dxi-series>
+        <dxi-series valueField="y2023" name="2023"></dxi-series>
+        <dxi-series valueField="y2024" name="2024"></dxi-series>
+        <dxi-series valueField="y2025" name="2025"></dxi-series>
+        <dxo-common-series-settings
+          argumentField="versionCode"
+          type="bar"
+          hoverMode="allArgumentPoints"
+          selectionMode="allArgumentPoints">
+        </dxo-common-series-settings>
+      </dx-chart>
+    </div>
+  </div>
+</div>

@@ -30,9 +30,7 @@ export class FinanceLimitsComponent implements OnInit {
   public async getFinanceLimitsByYear() {
     await this.http.get<IVersionLimits[]>(environment.apiUrl + '/finance/getFinanceLimitsByYear')
       .subscribe( response => {
-        console.log(response);
         this.versionLimits = response;
-
         this.isLoaded = true;
       });
   }

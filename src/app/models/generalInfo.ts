@@ -1,7 +1,9 @@
 export class GeneralInfo {
-  public totalFinanceLimit: string;
+  public totalFinanceBud: string;
+  public totalFinanceNoBud: string;
   public totalProjects: string;
   public totalWorks: string;
-  public totalLaunches: string;
+  public totalCompletedWorks: string;
+  public totalPlannedLaunches: string;
   public totalCompletedLaunches: string;
 }

@@ -1,0 +1,81 @@
+<div class="loader" *ngIf="!isLoaded"></div>
+<div class="container-fluid justify-content-start" *ngIf="isLoaded">
+  <ng-container class="card">
+    <app-version-selector
+      [versions]="versions"
+      (versionSelected)="changeCurrentVersion($event)"
+    ></app-version-selector>
+
+    <div class="section-select dropdown">
+      <div (click)="showSelector()">
+        <span *ngIf="currentSection" class="select-item">{{currentSection.sectionIdCode}}</span>
+        <button class="btn dropdown-toggle"></button>
+      </div>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"  [ngClass]="{'show': toggleFlag}">
+        <ng-select class="dropdown-item"
+                   [clearable]="false"
+                   [searchable]="true"
+                   [placeholder]="'поиск'"
+                   [(ngModel)]="currentSection"
+                   (ngModelChange)="changeCurrentSection()">
+          <ng-container *ngFor="let section of sections">
+            <ng-option [value]="section">{{section.sectionIdCode}}</ng-option>
+          </ng-container>
+        </ng-select>
+      </div>
+    </div>
+
+    <div class="card table-card">
+      <div class="card-body text-center">
+        <span class="card-title">Перечень мероприятий Федеральной космической программы России на 2016-2025 годы в области прикладных научных исследований и экспериментальных разработок, выполняемых по договорам на проведение научно-исследовательских, опытно-конструкторских и технологических работ</span>
+        <dx-data-grid class="table"
+                      [dataSource]="this.works"
+                      [hoverStateEnabled]="true"
+                      keyExpr="rid"
+                      (onRowExpanded)="getResults($event.key)"
+                      [allowColumnReordering]="true"
+                      [showBorders]="true">
+          <dxo-header-filter [visible]="true"></dxo-header-filter>
+          <dxo-column-chooser [mode]="'select'" [enabled]="true"></dxo-column-chooser>
+          <dxi-column caption="Наименование" dataField="name" dataType="string"></dxi-column>
+          <dxi-column caption="Начало" dataField="dateFrom" dataType="datetime"></dxi-column>
+          <dxi-column caption="Окончание" dataField="dateTo" dataType="datetime"></dxi-column>
+          <dxi-column caption="Выполнено" dataField="isDoneValue" dataType="string"></dxi-column>
+          <dxo-search-panel [placeholder]="'Поиск'" [visible]="true"></dxo-search-panel>
+          <dxo-group-panel [emptyPanelText]="'Группировать по полю'" [allowColumnDragging]="true" [visible]="true"></dxo-group-panel>
+          <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
+          <dxo-scrolling mode="virtual"></dxo-scrolling>
+          <dxo-master-detail [enabled]="true" template="detail"></dxo-master-detail>
+          <div *dxTemplate="let work of 'detail'">
+            <div [ngTemplateOutlet]="resultsTemplate"
+                 [ngTemplateOutletContext]="{rid: work.key}">
+
+            </div>
+          </div>
+        </dx-data-grid>
+      </div>
+    </div>
+
+  </ng-container>
+</div>
+
+<ng-template #resultsTemplate let-id="rid">
+  <ng-container *ngIf="isResultsLoaded">
+    <dx-data-grid class="table"
+                  [dataSource]="results"
+                  [hoverStateEnabled]="true"
+                  [allowColumnReordering]="true"
+                  [showBorders]="true">
+      <dxo-header-filter [visible]="true"></dxo-header-filter>
+      <dxo-column-chooser [mode]="'select'" [enabled]="true"></dxo-column-chooser>
+      <dxi-column caption="Наименование" dataField="name" dataType="string"></dxi-column>
+      <dxi-column caption="Начало" dataField="dateFrom" dataType="datetime"></dxi-column>
+      <dxi-column caption="Окончание" dataField="dateTo" dataType="datetime"></dxi-column>
+      <dxi-column caption="Тип" dataField="eventTypeIdCode" dataType="string"></dxi-column>
+      <dxo-search-panel [placeholder]="'Поиск'" [visible]="true"></dxo-search-panel>
+      <dxo-group-panel [emptyPanelText]="'Группировать по полю'" [allowColumnDragging]="true" [visible]="true"></dxo-group-panel>
+      <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
+      <dxo-scrolling mode="virtual"></dxo-scrolling>
+    </dx-data-grid>
+  </ng-container>
+</ng-template>

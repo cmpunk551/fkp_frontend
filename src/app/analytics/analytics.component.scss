@@ -20,49 +20,6 @@
   100% { transform: rotate(360deg); }
 }
 
-.card {
-  margin-top: 25px;
-}
-
-.container-fluid {
-  background: #F2F7FB;
-  padding: 32px;
-}
-
-.version-select {
-  font-size: 24px;
-  line-height: 29px;
-}
-.select-item {
-  display: inline;
-}
-.dropdown-menu {
-  width: 100%;
-}
-
-.info-cards {
-  .card {
-    padding-right: 24px;
-    background: #F2F7FB;
-    border: none;
-    .card-header {
-      opacity: 25%;
-      background-color: #F2F7FB;
-      border: none;
-    }
-    .card-title {
-      color: #192A3B;
-      font-size: 12px;
-      opacity: 25%;
-    }
-    .card-text {
-      font-style: normal;
-      font-weight: bold;
-      font-size: 28px;
-      line-height: 34px;
-    }
-  }
- }
 .table-card {
   background: #FFFFFF;
   border-radius: 8px;
@@ -75,12 +32,12 @@
     line-height: 24px;
     border: none;
   }
+  .chart-card {
+    justify-content: center;
+  }
   .card-body {
     border: none;
     font-size: 12px;
-  }
-  .chart-card {
-    justify-content: center;
   }
   .table {
     margin: 16px 24px;
@@ -88,15 +45,17 @@
     display:block;
     max-height : 400px;
   }
-  ::ng-deep #finance {
-    margin: 16px 24px;
-    max-width: 95%;
-    max-height : 400px;
-    overflow-y: hidden;
-    overflow-x: hidden;
-  }
 }
 ::ng-deep .chart {
   max-width: 95%;
   overflow-y: auto;
+}
+
+.card {
+  margin-top: 25px;
+}
+
+.container-fluid {
+  background: #F2F7FB;
+  padding: 32px;
 }

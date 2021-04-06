@@ -30,6 +30,7 @@ export class VersionSelectorComponent implements OnInit {
   public changeCurrentVersion(version: Version) {
     this.versionSelected.emit(version);
     this.current_version = version;
+    this.toggleFlag = false;
   }
 
 

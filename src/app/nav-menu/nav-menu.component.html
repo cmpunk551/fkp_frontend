@@ -3,26 +3,39 @@
       <div class="sidebar-logo" [inlineSVG]="'./assets/icons/logo-icon.svg'" [setSVGAttributes]="{'width' : '40px', 'height' : '40px'}"></div>
       <h3 [routerLink]="['/']">АС ИАО СПЦП</h3>
     </div>
+    <div class="side-bar-container">
       <div class="menus">
         <div class="menu">
-          <span class="menu-header">Программы</span>
+          <span class="menu-header"> Текущая программа</span>
           <ul class="menu-list">
-            <li class="menu-list-item" [routerLink]="['/versions']">Действующие</li>
-            <li class="menu-list-item">Архив</li>
-            <li class="menu-list-item" [routerLink]="['/analysis']">Формирование программы</li>
+            <li class="menu-list-item" [routerLink]="['/versions']">Общая информация</li>
             <li class="menu-list-item" [routerLink]="['/spacecrafts']">График запусков</li>
-            <li class="menu-list-item" [routerLink]="['/targetIndicators']">ЦИиП</li>
             <li class="menu-list-item" [routerLink]="['/financeWorkPlaces']">Финансирование</li>
-            <li class="menu-list-item" [routerLink]="['/financeLimits']">Финансовые лимиты</li>
+            <li class="menu-list-item" [routerLink]="['/work-events']">Мероприятия</li>
+            <li class="menu-list-item" [routerLink]="['/targetIndicators']">ЦИП</li>
+          </ul>
+          <span class="menu-header"> Аналитика</span>
+          <ul class="menu-list">
+            <li class="menu-list-item" [routerLink]="['/analytics']">Общая информация</li>
+            <li class="menu-list-item" [routerLink]="['/analytics/structure']">Структурный анализ</li>
+            <li class="menu-list-item" [routerLink]="['/analytics/pithy']">Содержательный анализ</li>
           </ul>
         </div>
+      </div>
+      <div class="profile align-text-bottom">
         <div class="side-menu">
-          <span class="menu-header">Система</span>
-          <ul class="menu-list ">
+          <ul class="side-menu-list">
+            <li class="menu-list-item">Задачи 10/2</li>
             <li class="menu-list-item" [routerLink]="['/admin']" *ngIf="authService.currentUserIsAdmin">Администрирование</li>
             <li class="menu-list-item" (click)="logout()">Выйти</li>
           </ul>
         </div>
+        <div class="scale">
+          <div class="form-group">
+            <input type="range" class="custom-range" (ngModelChange)="kek()" [(ngModel)]="scaleValue" id="formControlRange">
+          </div>
+        </div>
       </div>
+    </div>
  </div>
 

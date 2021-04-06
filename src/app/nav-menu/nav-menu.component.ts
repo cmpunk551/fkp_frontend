@@ -10,6 +10,7 @@ import {User} from '../models/User';
 })
 export class NavMenuComponent {
   public currentUser: User;
+  public scaleValue: number;
 
   @Input() public show = false;
   @Output() public showChange = new EventEmitter<boolean>();
@@ -23,5 +24,9 @@ export class NavMenuComponent {
   public logout() {
     this.authService.logout();
     this.router.navigate(['/login']);
+  }
+
+  public kek() {
+    console.log(this.scaleValue);
   }
 }

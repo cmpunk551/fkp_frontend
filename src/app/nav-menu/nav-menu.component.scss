@@ -2,6 +2,7 @@
   background: #192A3B;
   color: #fff;
   padding-top: 38px;
+  min-height: 100vh;
 }
 
 #sidebar-wrapper .sidebar-heading {
@@ -20,6 +21,15 @@
   width: 15rem;
 }
 
+.side-bar-container {
+  display: grid;
+  min-height: 95vh;
+}
+
+.menus {
+  min-height: 70vh;
+}
+
 .menu {
   margin-top: 28px;
 }
@@ -31,6 +41,7 @@
 }
 .menu-list {
   list-style-type: none;
+  padding-right: 5px;
   .menu-list-item {
     margin-top: 16px;
     font-size: 14px;
@@ -41,13 +52,38 @@
     color: white;
   }
 }
-
+.side-menu {
+}
 .side-menu-list {
   list-style-type: none;
-  .side-menu-list-item {
+  .menu-list-item {
     margin-top: 16px;
     font-size: 14px;
     line-height: 17px;
     color: #64809F;
   }
+  .menu-list-item:hover {
+    color: white;
+  }
+}
+.profile {
+  padding-right: 5px;
+  min-height: 12vh;
+  vertical-align: bottom;
+  .scale {
+    margin: 0 36px;
+  }
+}
+
+.custom-range::-webkit-slider-thumb {
+  background-color: #192A3B;
+  border: white;
+}
+
+.custom-range::-moz-range-thumb {
+  background: #192A3B;
+}
+
+.custom-range::-ms-thumb {
+  background: #192A3B;
 }

@@ -5,17 +5,17 @@
   ></app-version-selector>
   <div class="card table-card">
     <div class="card-body">
-      <span class="card-title">ЦИиП</span>
+      <div class="card-title text-center">
+        <span>Важнейшие целевые индикаторы и показатели реализации Федеральной космической программы России на 2016-2025 годы</span>
+      </div>
       <dx-data-grid class="table"
                     id="goalsContainer"
                     [dataSource]="this.current_version.targetIndicators"
                     [hoverStateEnabled]="true"
                     [allowColumnReordering]="true">
         <dxo-header-filter [visible]="true"></dxo-header-filter>
-        <dxo-filter-row [visible]="true"></dxo-filter-row>
         <dxo-column-chooser [mode]="'select'" [enabled]="true"></dxo-column-chooser>
         <dxi-column caption="Целевые индикаторы и показатели" dataField="indicatorName" dataType="string"></dxi-column>
-        <dxi-column caption="Приоритет" dataField="priority" dataType="string"></dxi-column>
         <dxi-column caption="Единица измерения" dataField="measureIdCode" dataType="string"></dxi-column>
         <dxi-column caption="Базовое значение" dataField="y0" dataType="string"></dxi-column>
         <dxi-column caption="2016" dataField="y1" dataType="string"></dxi-column>
@@ -28,10 +28,9 @@
         <dxi-column caption="2023" dataField="y8" dataType="string"></dxi-column>
         <dxi-column caption="2024" dataField="y9" dataType="string"></dxi-column>
         <dxi-column caption="2025" dataField="y10" dataType="string"></dxi-column>
-        <dxo-search-panel [placeholder]="'Поиск'" [visible]="true"></dxo-search-panel>
         <dxo-group-panel [emptyPanelText]="'Группировать по полю'" [allowColumnDragging]="true" [visible]="true"></dxo-group-panel>
-        <dxo-grouping texts="true: 'kek'" [autoExpandAll]="true"></dxo-grouping>
-        <dxo-scrolling mode="infinite"></dxo-scrolling>
+        <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
+        <dxo-scrolling mode="virtual"></dxo-scrolling>
       </dx-data-grid>
     </div>
   </div>
