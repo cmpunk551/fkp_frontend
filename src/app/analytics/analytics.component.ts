@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {GoalObjective} from '../models/goalObjective';
 import {environment} from '../../environments/environment';
+import {ChartData} from '../models/chartData';
 
 interface IGoal {
   versionCode: string;
@@ -22,20 +22,6 @@ interface IFinanceInfo {
   totalFinanceLimit: string;
 }
 
-interface ILimit {
-  versionCode: string;
-  y2016: string;
-  y2017: string;
-  y2018: string;
-  y2019: string;
-  y2020: string;
-  y2021: string;
-  y2022: string;
-  y2023: string;
-  y2024: string;
-  y2025: string;
-}
-
 @Component({
   selector: 'app-analytics',
   templateUrl: './analytics.component.html',
@@ -46,7 +32,8 @@ export class AnalyticsComponent implements OnInit {
   public goals: IGoal[];
   public workEvents: IWorkEvent[];
   public finances: IFinanceInfo[];
-  public limits: ILimit[];
+  public limits: ChartData[];
+  public financesByYear: ChartData[];
   constructor( public http: HttpClient, @Inject('BASE_URL') public baseUrl: string) {}
 
   public async ngOnInit() {
@@ -73,15 +60,24 @@ export class AnalyticsComponent implements OnInit {
       });
   }
   public async getFinanceLimitsByYear() {
-    await this.http.get<ILimit[]>(environment.apiUrl + '/finance/getFinanceLimitsByYear' )
+    await this.http.get<ChartData[]>(environment.apiUrl + '/finance/getFinanceLimitsByYear' )
       .subscribe(response => {
         this.limits = response;
       });
   }
+
+  public async getFinancesByYear() {
+    await this.http.get<ChartData[]>(environment.apiUrl + '/finance/getFinancesByYear' )
+      .subscribe(response => {
+        this.financesByYear = response;
+      });
+  }
+
   public async getData() {
     this.getGoalsObjectives();
     this.getWorksGeneralInfo();
     this.getFinanceGeneralInfo();
     this.getFinanceLimitsByYear();
+    this.getFinancesByYear();
   }
 }

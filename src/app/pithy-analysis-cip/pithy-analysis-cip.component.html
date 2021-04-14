@@ -1,0 +1,24 @@
+<div class="container-fluid justify-content-center">
+  <h3 class="text-center">Содержательный анализ/ЦИП</h3>
+  <div class="cards">
+    <div class="card-deck-container row justify-content-center">
+      <div class="card text-center col-3" [routerLink]="['/analytics/pithy/cip/summary']" >
+        <div class="card-header" [inlineSVG]="'./assets/icons/document.svg'"  [setSVGAttributes]="{'width' : '50px', 'height' : '50px'}"></div>
+        <div class="card-block text-center">
+          <span class="card-title">Общая Информация</span>
+        </div>
+      </div>
+      <div class="card text-center col-3" [routerLink]="['/analytics/pithy/cip/dictionary']">
+        <div class="card-header" [inlineSVG]="'./assets/icons/document.svg'"  [setSVGAttributes]="{'width' : '50px', 'height' : '50px'}"></div>
+        <div class="card-block text-center">
+          <span class="card-title">Коэффициент влияния на проекты</span>
+        </div>      </div>
+      <div class="card text-center col-3" [routerLink]="['/work']">
+        <div class="card-header" [inlineSVG]="'./assets/icons/document.svg'"  [setSVGAttributes]="{'width' : '50px', 'height' : '50px'}"></div>
+        <div class="card-block text-center">
+          <span class="card-title">Работа в процессе</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

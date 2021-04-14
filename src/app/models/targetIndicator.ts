@@ -1,4 +1,5 @@
 export class TargetIndicator {
+  public versionIdCode: string;
   public sY0: string;
   public sY1: string;
   public sY2: string;

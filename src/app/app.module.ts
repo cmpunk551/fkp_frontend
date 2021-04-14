@@ -32,6 +32,14 @@ import {StructureAnalysisComponent} from './structure-analysis/structure-analysi
 import {PithyAnalysisComponent} from './pithy-analysis/pithy-analysis.component';
 import {WorkInProgressComponent} from './work-in-progress/work-in-progress.component';
 import {WorkEventsComponent} from './work-events/work-events.component';
+import {PithyAnalysisCIPComponent} from './pithy-analysis-cip/pithy-analysis-cip.component';
+import {PithyAnalysisEfficiencyComponent} from './pithy-analysis-efficiency/pithy-analysis-efficiency.component';
+import {DurationEfficiencyComponent} from './duration-efficiency/duration-efficiency.component';
+import {StructureEfficiencyComponent} from './structure-efficiency/structure-efficiency.component';
+import {CostEfficiencyComponent} from './cost-efficiency/cost-efficiency.component';
+import {PithyAnalysisFinancesComponent} from './pithy-analysis-finances/pithy-analysis-finances.component';
+import {CIPSummaryComponent} from './cipsummary/cipsummary.component';
+import {DictionaryTargetIndicatorsComponent} from './dictionary-target-indicators/dictionary-target-indicators.component';
 
 @NgModule({
   declarations: [
@@ -51,10 +59,18 @@ import {WorkEventsComponent} from './work-events/work-events.component';
     FetchDataComponent,
     AnalyticsComponent,
     PithyAnalysisComponent,
+    PithyAnalysisCIPComponent,
+    PithyAnalysisEfficiencyComponent,
+    CostEfficiencyComponent,
+    DurationEfficiencyComponent,
+    StructureEfficiencyComponent,
+    PithyAnalysisFinancesComponent,
+    CIPSummaryComponent,
+    DictionaryTargetIndicatorsComponent,
     WorkInProgressComponent,
     WorkEventsComponent,
     StructureAnalysisComponent,
-    AdminPanelComponent
+    AdminPanelComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
@@ -74,6 +90,14 @@ import {WorkEventsComponent} from './work-events/work-events.component';
       {path: 'analytics', component: AnalyticsComponent},
       {path: 'analytics/structure', component: StructureAnalysisComponent},
       {path: 'analytics/pithy', component: PithyAnalysisComponent},
+      {path: 'analytics/pithy/finances', component: PithyAnalysisFinancesComponent},
+      {path: 'analytics/pithy/efficiency', component: PithyAnalysisEfficiencyComponent},
+      {path: 'analytics/pithy/efficiency/cost', component: CostEfficiencyComponent},
+      {path: 'analytics/pithy/efficiency/duration', component: DurationEfficiencyComponent},
+      {path: 'analytics/pithy/efficiency/structure', component: StructureEfficiencyComponent},
+      {path: 'analytics/pithy/cip', component: PithyAnalysisCIPComponent},
+      {path: 'analytics/pithy/cip/summary', component: CIPSummaryComponent},
+      {path: 'analytics/pithy/cip/dictionary', component: DictionaryTargetIndicatorsComponent},
       {path: 'work', component: WorkInProgressComponent},
       {path: 'work-events', component: WorkEventsComponent},
       {path: 'admin', component: AdminPanelComponent,  canActivate: [AuthGuard]},

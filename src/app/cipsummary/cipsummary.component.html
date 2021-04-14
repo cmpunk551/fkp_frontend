@@ -1,8 +1,5 @@
 <div class="container-fluid justify-content-start" *ngIf="isLoaded">
-  <app-version-selector
-    [versions]="versions"
-    (versionSelected)="changeCurrentVersion($event)"
-  ></app-version-selector>
+  <h3 class="text-center"> ЦИП / Общая информация</h3>
   <div class="card table-card">
     <div class="card-body">
       <div class="card-title text-center">
@@ -10,13 +7,14 @@
       </div>
       <dx-data-grid class="table"
                     id="goalsContainer"
-                    [dataSource]="this.current_version.targetIndicators"
+                    [dataSource]="targetIndicators"
                     [hoverStateEnabled]="true"
                     [allowColumnReordering]="true">
         <dxo-header-filter [visible]="true"></dxo-header-filter>
         <dxo-column-chooser [mode]="'select'" [enabled]="true"></dxo-column-chooser>
-        <dxi-column caption="Номер" dataField="indicatorNum" dataType="string" [groupIndex]="1"></dxi-column>
-        <dxi-column caption="Целевые индикаторы и показатели" dataField="indicatorName" [groupIndex]="2" dataType="string"></dxi-column>
+        <dxi-column caption="Версия" dataField="versionIdCode" dataType="string" [groupIndex]="1"></dxi-column>
+        <dxi-column caption="Номер" dataField="indicatorNum" dataType="string"></dxi-column>
+        <dxi-column caption="Целевые индикаторы и показатели" dataField="indicatorName" dataType="string"></dxi-column>
         <dxi-column caption="Показатель" dataField="f1" dataType="string"></dxi-column>
         <dxi-column caption="Единица измерения" dataField="measureIdCode" dataType="string"></dxi-column>
         <dxi-column caption="Базовое значение" dataField="y0" dataType="string"></dxi-column>

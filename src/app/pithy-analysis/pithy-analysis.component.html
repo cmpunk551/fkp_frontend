@@ -1,39 +1,41 @@
 <div class="container-fluid justify-content-center">
-  <h3>Содержательный анализ</h3>
+  <h3 class="text-center">Содержательный анализ</h3>
   <div class="cards">
-    <div class="card-deck">
-      <div class="card flex-row flex-wrap " [routerLink]="['/work']" >
-        <div class="card-title  ">Выделение различий в формулировках целей, задач, направлений, мероприятий, числовых значениях, других текстовых фрагментов</div>
+    <div class="card-deck-container row justify-content-center">
+      <div class="card text-center col-3" [routerLink]="['/analytics/pithy/finances']" >
+        <div class="card-header" [inlineSVG]="'./assets/icons/document.svg'"  [setSVGAttributes]="{'width' : '50px', 'height' : '50px'}"></div>
+        <div class="card-block text-center">
+          <span class="card-title">Финансирование</span>
+        </div>
       </div>
-      <div class="card flex-row flex-wrap" [routerLink]="['/work']">
-        <div class="card-title  ">Вывод количества изменений по разделам (подпрограммам) документа и типам изменений (формулировка цели, мероприятия, индикатор, объем финансирования и т.д.)</div>
-      </div>
-      <div class="card flex-row flex-wrap" [routerLink]="['/work']">
-        <div class="card-title  ">Возможность задания перечня атрибутов для анализа пользователем</div>
-      </div>
-      <div class="card flex-row flex-wrap" [routerLink]="['/work']">
-        <div class="card-title  ">Сравнение общих объемов финансирования - всего и по годам</div>
-      </div>
-      <div class="card flex-row flex-wrap" [routerLink]="['/work']">
-        <div class="card-title  ">Сравнение по разделам (группам мероприятий, в том числе задаваемым пользователем) - всего и по годам</div>
-      </div>
-    </div>
-    <div class="card-deck">
-      <div class="card flex-row flex-wrap" [routerLink]="['/work']">
-        <div class="card-title  ">Сравнение по мероприятиям из разных плановых документов - всего и по годам (группы мероприятий задаются пользователем)</div>
-      </div>
-      <div class="card flex-row flex-wrap" [routerLink]="['/work']">
-        <div class="card-title  ">Отображение эффективности в виде "показатель к затратам" по мероприятиям, направлениям</div>
-      </div>
-      <div class="card flex-row flex-wrap" [routerLink]="['/work']">
-        <div class="card-title  ">Вычисление эффективности по программному документу в целом</div>
-      </div>
-      <div class="card flex-row flex-wrap" [routerLink]="['/work']">
-        <div class="card-title  ">Возможность введения пользователем методики определения эффективности опираясь на доступные в системе параметры документа (выбор параметров для анализа из списка</div>
-      </div>
-      <div class="card flex-row flex-wrap" [routerLink]="['/work']">
-        <div class="card-title  ">Сравнение эффективности по версиям документа</div>
+      <div class="card text-center col-3" [routerLink]="['/analytics/pithy/cip']">
+        <div class="card-header" [inlineSVG]="'./assets/icons/document.svg'"  [setSVGAttributes]="{'width' : '50px', 'height' : '50px'}"></div>
+        <div class="card-block text-center">
+          <span class="card-title">ЦИП</span>
+        </div>      </div>
+      <div class="card text-center col-3" [routerLink]="['/analytics/pithy/efficiency']">
+        <div class="card-header" [inlineSVG]="'./assets/icons/document.svg'"  [setSVGAttributes]="{'width' : '50px', 'height' : '50px'}"></div>
+        <div class="card-block text-center">
+          <span class="card-title">Эффективность</span>
+        </div>
       </div>
     </div>
+<!--    <div class="card-deck-container card-deck">-->
+<!--      <div class="card flex-row flex-wrap" [routerLink]="['/work']">-->
+<!--        <div class="card-title  ">Сравнение по мероприятиям из разных плановых документов - всего и по годам (группы мероприятий задаются пользователем)</div>-->
+<!--      </div>-->
+<!--      <div class="card flex-row flex-wra p" [routerLink]="['/work']">-->
+<!--        <div class="card-title  ">Отображение эффективности в виде "показатель к затратам" по мероприятиям, направлениям</div>-->
+<!--      </div>-->
+<!--      <div class="card flex-row flex-wrap" [routerLink]="['/work']">-->
+<!--        <div class="card-title  ">Вычисление эффективности по программному документу в целом</div>-->
+<!--      </div>-->
+<!--      <div class="card flex-row flex-wrap" [routerLink]="['/work']">-->
+<!--        <div class="card-title  ">Возможность введения пользователем методики определения эффективности опираясь на доступные в системе параметры документа (выбор параметров для анализа из списка</div>-->
+<!--      </div>-->
+<!--      <div class="card flex-row flex-wrap" [routerLink]="['/work']">-->
+<!--        <div class="card-title  ">Сравнение эффективности по версиям документа</div>-->
+<!--      </div>-->
+<!--    </div>-->
   </div>
 </div>

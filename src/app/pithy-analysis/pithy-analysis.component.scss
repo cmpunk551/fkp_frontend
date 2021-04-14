@@ -1,10 +1,32 @@
-.card {
-  margin-top: 25px;
-  padding: 10px;
-  max-width: 400px;
-  font-weight: bold;
+.card-deck-container {
+  margin-top: 50px;
 }
 
+.card {
+  margin-left: 30px;
+  padding-right: 24px;
+  padding-bottom: 10px;
+  background: white;
+  .card-header {
+    opacity: 25%;
+    background-color: #F2F7FB;
+    border: none;
+  }
+  .card-block {
+  }
+  .card-title {
+    color: #192A3B;
+    font-size: 18px;
+    font-weight: bold;
+    opacity: 80%;
+  }
+  .card-text {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 28px;
+    line-height: 34px;
+  }
+}
 .container-fluid {
   background: #F2F7FB;
   padding: 32px;

@@ -25,16 +25,16 @@
       <div class="profile align-text-bottom">
         <div class="side-menu">
           <ul class="side-menu-list">
-            <li class="menu-list-item">Задачи 10/2</li>
+<!--            <li class="menu-list-item">Задачи 10/2</li>-->
             <li class="menu-list-item" [routerLink]="['/admin']" *ngIf="authService.currentUserIsAdmin">Администрирование</li>
             <li class="menu-list-item" (click)="logout()">Выйти</li>
           </ul>
         </div>
-        <div class="scale">
-          <div class="form-group">
-            <input type="range" class="custom-range" (ngModelChange)="kek()" [(ngModel)]="scaleValue" id="formControlRange">
-          </div>
-        </div>
+<!--        <div class="scale">-->
+<!--          <div class="form-group">-->
+<!--            <input type="range" class="custom-range" (ngModelChange)="kek()" [(ngModel)]="scaleValue" id="formControlRange">-->
+<!--          </div>-->
+<!--        </div>-->
       </div>
     </div>
  </div>

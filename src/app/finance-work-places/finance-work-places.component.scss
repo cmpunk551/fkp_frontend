@@ -1,5 +1,6 @@
 .card {
   margin-top: 25px;
+  height: 80vh;
 }
 
 .container-fluid {
@@ -27,6 +28,11 @@
     margin: 16px 24px;
     max-width: 95%;
     display:block;
-    max-height : 70vh;
+  }
+  ::ng-deep #finance {
+    margin: 16px 24px;
+    max-width: 95%;
+    max-height: 70vh;
+    display: block;
   }
 }

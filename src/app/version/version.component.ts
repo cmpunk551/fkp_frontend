@@ -9,6 +9,7 @@ import {Version} from '../models/version';
 import {FinanceLimit} from '../models/financeLimit';
 import {Finance} from '../models/finance';
 import {FinanceWorkplace} from '../models/financeWorkplace';
+import {ChartData} from '../models/chartData';
 
 @Component({
   selector: 'app-version',
@@ -20,6 +21,8 @@ export class VersionComponent implements OnInit {
   public versions: Version[];
   public current_version: Version;
   public finance_data_source: any;
+  public financesByChapter: any;
+  public financesBySubChapter: any;
   public isLoaded = false;
   public isInfoLoaded = false;
 
@@ -57,18 +60,32 @@ export class VersionComponent implements OnInit {
     });
   }
   public async getFinanceLimitsByYear() {
-    await this.http.get<FinanceLimit[]>(environment.apiUrl + '/finance/getFinanceLimitsByYear/' + this.current_version.rid)
+    await this.http.get<ChartData[]>(environment.apiUrl + '/finance/getFinanceLimitsByYear/' + this.current_version.rid)
       .subscribe( response => {
         this.current_version.financeLimits = response;
       });
   }
 
   public async getFinancesByYear() {
-    await this.http.get<Finance[]>(environment.apiUrl + '/finance/getFinancesByYear/' + this.current_version.rid)
+    await this.http.get<ChartData[]>(environment.apiUrl + '/finance/getFinancesByYear/' + this.current_version.rid)
       .subscribe( response => {
         this.current_version.finances = response;
       });
   }
+
+  public async getFinancesByChapter() {
+    await this.http.get<ChartData[]>(environment.apiUrl + '/finance/getFinancesByChapter/' + this.current_version.rid)
+      .subscribe( response => {
+        this.financesByChapter = response;
+      });
+  }
+  public async getFinancesBySubChapterOfRDChapter() {
+    await this.http.get<ChartData[]>(environment.apiUrl + '/finance/getFinancesBySubchapterOfRDChapter/' + this.current_version.rid)
+      .subscribe( response => {
+        this.financesBySubChapter = response;
+      });
+  }
+
   public async getFinanceWorkPlaces() {
     await this.http.get<FinanceWorkplace[]>(environment.apiUrl + '/finance/getFinanceWorkPlaces/' + this.current_version.rid)
       .subscribe( response => {
@@ -105,9 +122,9 @@ export class VersionComponent implements OnInit {
     this.getGeneralInfo();
     this.getFinanceLimitsByYear();
     this.getFinancesByYear();
-    this.getFinanceWorkPlaces();
+    this.getFinancesByChapter();
+    this.getFinancesBySubChapterOfRDChapter();
     this.getGoalsObjectives();
-    this.getProjects();
     this.isLoaded = true;
   }
 

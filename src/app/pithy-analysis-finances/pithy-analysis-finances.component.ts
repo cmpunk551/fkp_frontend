@@ -1,42 +1,32 @@
-import {Component, Inject, OnInit, ViewChild} from '@angular/core';
-import {Version} from '../models/version';
-import {HttpClient} from '@angular/common/http';
-import {environment} from '../../environments/environment';
-import {TargetIndicator} from '../models/targetIndicator';
+import {Component, Inject, OnInit} from '@angular/core';
 import {FinanceWorkplace} from '../models/financeWorkplace';
+import {environment} from '../../environments/environment';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
-  selector: 'app-finance-work-places',
-  templateUrl: './finance-work-places.component.html',
-  styleUrls: ['./finance-work-places.component.scss']
+  selector: 'app-pithy-analysis-finances',
+  templateUrl: './pithy-analysis-finances.component.html',
+  styleUrls: ['./pithy-analysis-finances.component.scss']
 })
-export class FinanceWorkPlacesComponent implements OnInit {
-
-  @ViewChild('pivotCard') public cardBody: HTMLDivElement;
-
-  public versions: Version[];
-  public current_version: Version;
+export class PithyAnalysisFinancesComponent implements OnInit {
   public dataSource: any;
   public isLoaded = false;
   constructor( public http: HttpClient, @Inject('BASE_URL') public baseUrl: string) {}
 
   public async ngOnInit() {
-    await this.getVersions();
-  }
-
-  public async getVersions() {
-    await this.http.get<Version[]>( environment.apiUrl + '/versions').subscribe(response => {
-      this.versions = response;
-      this.isLoaded = true;
-    });
+    await this.getFinanceWorkPlaces();
   }
 
   public async getFinanceWorkPlaces() {
-    await this.http.get<FinanceWorkplace[]>(environment.apiUrl + '/finance/getFinanceWorkPlaces/' + this.current_version.rid)
+    await this.http.get<any[]>(environment.apiUrl + '/finance/getFinanceWorkPlaces')
       .subscribe( response => {
-        this.current_version.financeWorkPlaces = response;
         this.dataSource = {
           fields: [
+            {
+              caption: 'Версия',
+              dataField: 'versionCode',
+              area: 'row',
+            },
             {
               caption: 'Раздел',
               dataField: 'chapter',
@@ -69,18 +59,10 @@ export class FinanceWorkPlacesComponent implements OnInit {
               summaryType: 'sum',
               area: 'data'
             }],
-            store: this.current_version.financeWorkPlaces
+          store: response
         };
-
+        this.isLoaded = true;
       });
   }
-
-  public async changeCurrentVersion(version: Version) {
-    this.isLoaded = false;
-    this.current_version = version;
-    this.getFinanceWorkPlaces();
-    this.isLoaded = true;
-  }
-
 
 }

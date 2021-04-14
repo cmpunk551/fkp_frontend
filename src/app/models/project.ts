@@ -5,6 +5,9 @@ export class Project {
   priority: string;
   systemName: string;
   type: string;
+  dateFrom: string;
+  dateTo: string;
+  koeff: string;
   mastered: string;
   remains: string;
 }

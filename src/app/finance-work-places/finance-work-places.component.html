@@ -1,4 +1,4 @@
-<div class="container-fluid justify-content-start" *ngIf="isLoaded">
+<div class="container-fluid justify-content-center" *ngIf="isLoaded">
   <app-version-selector
     [versions]="versions"
     (versionSelected)="changeCurrentVersion($event)"
@@ -8,24 +8,20 @@
       <div class="card-title text-center">
         <span >Объем финансирования мероприятий Федеральной космической программы России на 2016-2025 годы в области прикладных научных исследований и экспериментальных разработок, выполняемых по договорам на проведение научно-исследовательских, опытно-конструкторских и технологических работ</span>
       </div>
-      <dx-data-grid class="table"
-                    id="goalsContainer"
-                    [dataSource]="this.current_version.financeWorkPlaces"
-                    [hoverStateEnabled]="true"
-                    [allowColumnReordering]="true">
-        <dxo-header-filter [visible]="true"></dxo-header-filter>
-        <dxo-column-chooser [mode]="'select'" [enabled]="true"></dxo-column-chooser>
-        <dxi-column caption="Наименование мероприятия" dataField="наименованиеМероприятия" dataType="string"></dxi-column>
-        <dxi-column caption="Шифр проекта" dataField="шифрПроекта" dataType="string"></dxi-column>
-        <dxi-column caption="Исполнитель" dataField="исполнитель" dataType="string"></dxi-column>
-        <dxi-column caption="Вид финансирования" dataField="видФинансирования" dataType="string"></dxi-column>
-        <dxi-column caption="Год" dataField="показательФинансированияПоГодам" dataType="string"></dxi-column>
-        <dxi-column caption="Значение финансового показателя" dataField="значениеФинансовогоПоказателя" dataType="string"></dxi-column>
-        <dxo-group-panel [emptyPanelText]="'Группировать по полю'" [allowColumnDragging]="true" [visible]="true"></dxo-group-panel>
-        <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
-        <dxo-search-panel [placeholder]="'Поиск'" [visible]="true"></dxo-search-panel>
-        <dxo-scrolling mode="virtual"></dxo-scrolling>
-      </dx-data-grid>
+          <dx-pivot-grid class="table" id="finance"
+                         [allowSortingBySummary]="true"
+                         [allowSorting]="true"
+                         [allowFiltering]="true"
+                         [allowExpandAll]="true"
+                         [showBorders]="true"
+                         [height]="'55vh'"
+                         rowHeaderLayout="tree"
+                         [dataSource]="dataSource">
+            <dxo-field-chooser
+              [allowSearch]="true"
+              [enabled]="true">
+            </dxo-field-chooser>
+          </dx-pivot-grid>
     </div>
   </div>
 </div>

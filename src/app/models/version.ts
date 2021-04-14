@@ -7,12 +7,15 @@ import {TargetIndicator} from './targetIndicator';
 import {FinanceLimit} from './financeLimit';
 import {Finance} from './finance';
 import {FinanceWorkplace} from './financeWorkplace';
+import {ChartData} from './chartData';
 
 export class Version {
   public rid: string;
   public code: string;
   public name: string;
   public projectProjects: Project[];
+  public indicatorNum: string;
+  public f1: string;
   public laborCost: string;
   public priority: string;
   public description: string;
@@ -22,6 +25,6 @@ export class Version {
   public spacecrafts: Spacecraft[];
   public targetIndicators: TargetIndicator[];
   public financeWorkPlaces: FinanceWorkplace[];
-  public financeLimits: FinanceLimit[];
-  public finances: Finance[];
+  public financeLimits: ChartData[];
+  public finances: ChartData[];
 }

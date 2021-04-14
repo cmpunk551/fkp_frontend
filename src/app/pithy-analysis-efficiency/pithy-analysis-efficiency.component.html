@@ -1,0 +1,24 @@
+<div class="container-fluid justify-content-center">
+  <h3 class="text-center">Содержательный анализ/ Эффективность</h3>
+  <div class="cards">
+    <div class="card-deck-container row justify-content-center">
+      <div class="card text-center col-3" [routerLink]="['/analytics/pithy/efficiency/cost']" >
+        <div class="card-header" [inlineSVG]="'./assets/icons/document.svg'"  [setSVGAttributes]="{'width' : '50px', 'height' : '50px'}"></div>
+        <div class="card-block text-center">
+          <span class="card-title">Экономическая эффективность</span>
+        </div>
+      </div>
+      <div class="card text-center col-3" [routerLink]="['/analytics/pithy/efficiency/duration']">
+        <div class="card-header" [inlineSVG]="'./assets/icons/document.svg'"  [setSVGAttributes]="{'width' : '50px', 'height' : '50px'}"></div>
+        <div class="card-block text-center">
+          <span class="card-title">Средняя продолжительность по ОКР</span>
+        </div>      </div>
+      <div class="card text-center col-3" [routerLink]="['/analytics/pithy/efficiency/structure']">
+        <div class="card-header" [inlineSVG]="'./assets/icons/document.svg'"  [setSVGAttributes]="{'width' : '50px', 'height' : '50px'}"></div>
+        <div class="card-block text-center">
+          <span class="card-title">Эффективность выполнения</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

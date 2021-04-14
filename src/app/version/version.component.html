@@ -34,7 +34,6 @@
         <div class="card-body">
           <span class="card-title">Цели и задачи</span>
           <dx-tree-list class="table"
-            id="employees"
             [dataSource]="current_version.goalsObjectives"
             keyExpr="id"
             parentIdExpr="parentId"
@@ -49,30 +48,30 @@
           </dx-tree-list>
         </div>
       </div>
-      <div class="card table-card">
-        <div class="card-body">
-          <span class="card-title">Проекты</span>
-          <dx-data-grid class="table"
-                        id="projectContainer"
-                        [dataSource]="this.current_version.projectProjects"
-                        [hoverStateEnabled]="true"
-                        [allowColumnReordering]="true"
-                        [showBorders]="true">
-            <dxo-header-filter [visible]="true"></dxo-header-filter>
-            <dxo-column-chooser [mode]="'select'" [enabled]="true"></dxo-column-chooser>
-            <dxi-column  caption="Шифр" dataField="code" dataType="string"></dxi-column>
-            <dxi-column caption="Наименование" dataField="name" dataType="string"></dxi-column>
-            <dxi-column caption="Тип проекта" dataField="systemName" dataType="string"></dxi-column>
-            <dxi-column caption="Стоимость" dataField="cost" dataType="string"></dxi-column>
-            <dxi-column caption="Освоено" dataField="mastered" dataType="string"></dxi-column>
-            <dxi-column caption="Остаток" dataField="remains" dataType="string"></dxi-column>
-            <dxo-search-panel [placeholder]="'Поиск'" [visible]="true"></dxo-search-panel>
-            <dxo-group-panel [emptyPanelText]="'Группировать по полю'" [allowColumnDragging]="true" [visible]="true"></dxo-group-panel>
-            <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
-            <dxo-scrolling mode="virtual"></dxo-scrolling>
-          </dx-data-grid>
-        </div>
-      </div>
+<!--      <div class="card table-card">-->
+<!--        <div class="card-body">-->
+<!--          <span class="card-title">Проекты</span>-->
+<!--          <dx-data-grid class="table"-->
+<!--                        id="projectContainer"-->
+<!--                        [dataSource]="this.current_version.projectProjects"-->
+<!--                        [hoverStateEnabled]="true"-->
+<!--                        [allowColumnReordering]="true"-->
+<!--                        [showBorders]="true">-->
+<!--            <dxo-header-filter [visible]="true"></dxo-header-filter>-->
+<!--            <dxo-column-chooser [mode]="'select'" [enabled]="true"></dxo-column-chooser>-->
+<!--            <dxi-column  caption="Шифр" dataField="code" dataType="string"></dxi-column>-->
+<!--            <dxi-column caption="Наименование" dataField="name" dataType="string"></dxi-column>-->
+<!--            <dxi-column caption="Тип проекта" dataField="systemName" dataType="string"></dxi-column>-->
+<!--            <dxi-column caption="Стоимость" dataField="cost" dataType="string"></dxi-column>-->
+<!--            <dxi-column caption="Освоено" dataField="mastered" dataType="string"></dxi-column>-->
+<!--            <dxi-column caption="Остаток" dataField="remains" dataType="string"></dxi-column>-->
+<!--            <dxo-search-panel [placeholder]="'Поиск'" [visible]="true"></dxo-search-panel>-->
+<!--            <dxo-group-panel [emptyPanelText]="'Группировать по полю'" [allowColumnDragging]="true" [visible]="true"></dxo-group-panel>-->
+<!--            <dxo-grouping [autoExpandAll]="true"></dxo-grouping>-->
+<!--            <dxo-scrolling mode="virtual"></dxo-scrolling>-->
+<!--          </dx-data-grid>-->
+<!--        </div>-->
+<!--      </div>-->
       <div class="card table-card">
         <div class="card-body chart-card">
           <span class="card-title">Финансовые лимиты</span>
@@ -81,13 +80,22 @@
             id="chart"
             title="Финансовые лимиты"
             [dataSource]="this.current_version.financeLimits ">
-            <dxi-series
-              argumentField="year"
-              valueField="financeLimit"
-              type="bar"
-              name="{{current_version.code}}"
-              color="#0366d6">
-            </dxi-series>
+            <dxi-value-axis position="right">
+              <dxo-title text="миллионы"></dxo-title>
+            </dxi-value-axis>
+            <dxo-series-template
+              nameField="name">
+            </dxo-series-template>
+            <dxo-common-series-settings
+              [color]="'#0366d6'"
+              argumentField="argument"
+              valueField="value"
+              type="bar">
+            </dxo-common-series-settings>
+            <dxo-tooltip
+              [enabled]="true"
+              >
+            </dxo-tooltip>
           </dx-chart>
         </div>
       </div>
@@ -99,35 +107,71 @@
             id="finance-chart"
             title="Финансирование Бюджет/Внебюджет"
             [dataSource]="current_version.finances">
-            <dxi-series valueField="totalFinanceBud" name="Бюджет"></dxi-series>
-            <dxi-series valueField="totalFinanceNoBud" name="Внебюджет"></dxi-series>
             <dxi-value-axis position="right">
               <dxo-title text="миллионы"></dxo-title>
             </dxi-value-axis>
+            <dxo-series-template
+              nameField="name">
+            </dxo-series-template>
             <dxo-common-series-settings
-              argumentField="year"
+              argumentField="argument"
+              valueField="value"
               type="stackedBar">
             </dxo-common-series-settings>
+            <dxo-tooltip
+              [enabled]="true"
+              >
+            </dxo-tooltip>
           </dx-chart>
         </div>
       </div>
       <div class="card table-card">
-        <div class="card-body">
-          <span class="card-title">Финансирование</span>
-          <dx-pivot-grid class="table" id="finance"
-                         [allowSortingBySummary]="true"
-                         [allowSorting]="true"
-                         [allowFiltering]="true"
-                         [allowExpandAll]="true"
-                         [height]="440"
-                         [showBorders]="true"
-                         [dataSource]="finance_data_source">
-            <dxo-field-chooser
-              [allowSearch]="true"
-              [enabled]="true">
-            </dxo-field-chooser>          </dx-pivot-grid>
+        <div class="card-body chart-card">
+          <span class="card-title">Финансирование по подразделам раздела НИОКР</span>
+          <dx-chart
+            class="chart"
+            id="finance-by-chapter-chart"
+            title="Финансирование по подразделам раздела НИОКР"
+            palette="dark-violet"
+            [dataSource]="financesBySubChapter">
+            <dxi-value-axis position="right">
+              <dxo-title text="миллионы"></dxo-title>
+            </dxi-value-axis>
+            <dxo-series-template
+              nameField="name">
+            </dxo-series-template>
+            <dxo-common-series-settings
+              argumentField="argument"
+              valueField="value"
+              type="bar">
+            </dxo-common-series-settings>
+            <dxo-tooltip
+              [enabled]="true"
+              >
+            </dxo-tooltip>
+          </dx-chart>
         </div>
       </div>
+
+
+<!--      <div class="card table-card">-->
+<!--        <div class="card-body">-->
+<!--          <span class="card-title">Финансирование</span>-->
+<!--          <dx-pivot-grid class="table" id="finance"-->
+<!--                         [allowSortingBySummary]="true"-->
+<!--                         [allowSorting]="true"-->
+<!--                         [allowFiltering]="true"-->
+<!--                         [allowExpandAll]="true"-->
+<!--                         [height]="440"-->
+<!--                         [showBorders]="true"-->
+<!--                         [dataSource]="finance_data_source">-->
+<!--            <dxo-field-chooser-->
+<!--              [allowSearch]="true"-->
+<!--              [enabled]="true">-->
+<!--            </dxo-field-chooser>-->
+<!--          </dx-pivot-grid>-->
+<!--        </div>-->
+<!--      </div>-->
     </ng-container>
 
   </ng-container>

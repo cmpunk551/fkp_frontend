@@ -1,0 +1,55 @@
+<div class="container-fluid justify-content-start" *ngIf="isLoaded">
+  <h3 class="text-center">ЦИП / Коэффициент влияния на проекты</h3>
+  <div class="card table-card">
+    <div class="card-body">
+      <div class="text-center">
+        <span class="card-title text-center"> Целевые индикаторы и показатели</span>
+      </div>
+      <dx-tree-list class="table-tree"
+                    [dataSource]="indicators"
+                    keyExpr="id"
+                    parentIdExpr="parentId"
+                    [allowColumnResizing]="true"
+                    [allowColumnReordering]="true"
+                    [showRowLines]="true"
+                    [showBorders]="true"
+                    (onSelectionChanged)="selectIndicator($event)"
+                    [expandedRowKeys]="[1]">
+        <dxo-header-filter [visible]="true"></dxo-header-filter>
+        <dxo-column-chooser [mode]="'select'" [enabled]="true"></dxo-column-chooser>
+        <dxo-selection mode="single"></dxo-selection>
+        <dxi-column dataField="code" caption="Код"></dxi-column>
+        <dxi-column dataField="name" caption="Наименование"></dxi-column>
+        <dxi-column dataField="versionCode" caption="Версия"></dxi-column>
+        <dxo-search-panel [placeholder]="'Поиск'" [visible]="true"></dxo-search-panel>
+        <dxo-scrolling mode="virtual"></dxo-scrolling>
+      </dx-tree-list>
+    </div>
+  </div>
+  <div class="card table-card" *ngIf="isIndicatorSelected">
+    <div class="card-body">
+      <div class="text-center">
+        <span class="card-title">Коэффициент влияния на проекты</span>
+      </div>
+      <dx-data-grid class="table"
+                          id="projectContainer"
+                          [dataSource]="projects"
+                          [hoverStateEnabled]="true"
+                          [allowColumnReordering]="true"
+                          [showBorders]="true">
+        <dxo-header-filter [visible]="true"></dxo-header-filter>
+        <dxo-column-chooser [mode]="'select'" [enabled]="true"></dxo-column-chooser>
+        <dxi-column  caption="Шифр" dataField="code" dataType="string"></dxi-column>
+        <dxi-column caption="Наименование" dataField="name" dataType="string"></dxi-column>
+        <dxi-column caption="Тип проекта" dataField="type" dataType="string"></dxi-column>
+        <dxi-column caption="Начало" dataField="dateFrom" dataType="string"></dxi-column>
+        <dxi-column caption="Окончание" dataField="dateTo" dataType="string"></dxi-column>
+        <dxi-column caption="Коэффициент влияния" dataField="koeff" dataType="string"></dxi-column>
+        <dxo-search-panel [placeholder]="'Поиск'" [visible]="true"></dxo-search-panel>
+        <dxo-group-panel [emptyPanelText]="'Группировать по полю'" [allowColumnDragging]="true" [visible]="true"></dxo-group-panel>
+        <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
+        <dxo-scrolling mode="virtual"></dxo-scrolling>
+      </dx-data-grid>
+    </div>
+  </div>
+</div>

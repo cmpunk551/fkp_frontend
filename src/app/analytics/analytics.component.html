@@ -1,6 +1,6 @@
 <div class="loader" *ngIf="!isLoaded"></div>
-<div class="container-fluid justify-content-start" *ngIf="isLoaded">
-  <h3>Общая информация</h3>
+<div class="container-fluid justify-content-center" *ngIf="isLoaded">
+  <h3 class="text-center">Общая информация</h3>
   <div class="card table-card">
     <div class="card-body">
       <span class="card-title">Задачи</span>
@@ -66,28 +66,48 @@
   </div>
   <div class="card table-card">
     <div class="card-body">
-      <span class="card-title">Финансовые лимиты</span>
       <dx-chart
-        id="chart"
         class="chart"
         title="Финансовые лимиты"
         [dataSource]="this.limits">
-        <dxi-series valueField="y2016" name="2016"></dxi-series>
-        <dxi-series valueField="y2017" name="2017"></dxi-series>
-        <dxi-series valueField="y2018" name="2018"></dxi-series>
-        <dxi-series valueField="y2019" name="2019"></dxi-series>
-        <dxi-series valueField="y2020" name="2020"></dxi-series>
-        <dxi-series valueField="y2021" name="2021"></dxi-series>
-        <dxi-series valueField="y2022" name="2022"></dxi-series>
-        <dxi-series valueField="y2023" name="2023"></dxi-series>
-        <dxi-series valueField="y2024" name="2024"></dxi-series>
-        <dxi-series valueField="y2025" name="2025"></dxi-series>
+        <dxi-value-axis position="right">
+          <dxo-title text="миллионы"></dxo-title>
+        </dxi-value-axis>
+        <dxo-series-template
+          nameField="name">
+        </dxo-series-template>
         <dxo-common-series-settings
-          argumentField="versionCode"
-          type="bar"
-          hoverMode="allArgumentPoints"
-          selectionMode="allArgumentPoints">
+          argumentField="argument"
+          valueField="value"
+          type="bar">
         </dxo-common-series-settings>
+        <dxo-tooltip
+          [enabled]="true"
+          >
+        </dxo-tooltip>
+      </dx-chart>
+    </div>
+  </div>
+  <div class="card table-card">
+    <div class="card-body">
+      <dx-chart
+        class="chart"
+        title="Изменения объемов финансирования"
+        [dataSource]="this.financesByYear">
+        <dxi-value-axis position="right">
+          <dxo-title text="миллионы"></dxo-title>
+        </dxi-value-axis>
+        <dxo-series-template
+          nameField="name">
+        </dxo-series-template>
+        <dxo-common-series-settings
+          argumentField="argument"
+          valueField="value"
+          type="line">
+        </dxo-common-series-settings>
+        <dxo-tooltip
+          [enabled]="true">
+        </dxo-tooltip>
       </dx-chart>
     </div>
   </div>

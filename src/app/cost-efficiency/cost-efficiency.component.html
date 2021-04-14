@@ -1,0 +1,34 @@
+<div class="loader" *ngIf="!isLoaded"></div>
+<div class="container-fluid" *ngIf="isLoaded">
+  <h3 class="text-center">Экономическая эффективность</h3>
+  <div class="card table-card">
+    <div class="card-body">
+      <dx-data-grid class="table"
+                    [dataSource]="economicEffects"
+                    [allowColumnResizing]="true"
+                    [allowColumnReordering]="true"
+                    [showRowLines]="true"
+                    [showBorders]="true">
+        <dxo-header-filter [visible]="true"></dxo-header-filter>
+        <dxo-column-chooser [mode]="'select'" [enabled]="true"></dxo-column-chooser>
+        <dxi-column dataField="versionIdCode" caption="Версия"></dxi-column>
+        <dxi-column dataField="name" caption="Наименование"></dxi-column>
+        <dxi-column dataField="sum1" caption="2016"></dxi-column>
+        <dxi-column dataField="sum2" caption="2017"></dxi-column>
+        <dxi-column dataField="sum3" caption="2018"></dxi-column>
+        <dxi-column dataField="sum4" caption="2019"></dxi-column>
+        <dxi-column dataField="sum5" caption="2020"></dxi-column>
+        <dxi-column dataField="sum6" caption="2021"></dxi-column>
+        <dxi-column dataField="sum7" caption="2022"></dxi-column>
+        <dxi-column dataField="sum8" caption="2023"></dxi-column>
+        <dxi-column dataField="sum9" caption="2024"></dxi-column>
+        <dxi-column dataField="sum10" caption="2025"></dxi-column>
+        <dxi-column dataField="summ" caption="Всего"></dxi-column>
+        <dxo-group-panel [emptyPanelText]="'Группировать по полю'" [allowColumnDragging]="true" [visible]="true"></dxo-group-panel>
+        <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
+        <dxo-search-panel [placeholder]="'Поиск'" [visible]="true"></dxo-search-panel>
+        <dxo-scrolling mode="virtual"></dxo-scrolling>
+      </dx-data-grid>
+    </div>
+  </div>
+</div>
