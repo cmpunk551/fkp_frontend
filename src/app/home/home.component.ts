@@ -31,7 +31,7 @@ export class HomeComponent {
   }
 
   public getApi(): string {
-    return environment.dashboardUrl + '/api/dashboardUrl';
+    return environment.dashboardUrl + '/api/dashboard';
   }
 
 }
