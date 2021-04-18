@@ -4,6 +4,7 @@
 
 export const environment = {
   apiUrl: 'http://localhost:5001',
+  dashboardUrl: 'http://localhost:5005',
   production: false
 };
 

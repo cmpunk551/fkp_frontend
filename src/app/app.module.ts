@@ -21,7 +21,15 @@ import {NgSelectModule} from '@ng-select/ng-select';
 import {JwtInterceptor} from './helpers/jwt.interceptor';
 import {ErrorInterceptor} from './helpers/error.interspector';
 import {AdminPanelComponent} from './admin-panel/admin-panel.component';
-import {DxChartModule, DxDataGridModule, DxPivotGridModule, DxSliderModule, DxTreeListModule} from 'devextreme-angular';
+import {
+  DxButtonModule,
+  DxChartModule,
+  DxDataGridModule,
+  DxPivotGridModule,
+  DxSelectBoxModule,
+  DxSliderModule,
+  DxTreeListModule
+} from 'devextreme-angular';
 import {VersionSelectorComponent} from './version-selector/version-selector.component';
 import {SpacecraftsComponent} from './spacecrafts/spacecrafts.component';
 import {TargetIndicatorsComponent} from './target-indicators/target-indicators.component';
@@ -40,6 +48,7 @@ import {CostEfficiencyComponent} from './cost-efficiency/cost-efficiency.compone
 import {PithyAnalysisFinancesComponent} from './pithy-analysis-finances/pithy-analysis-finances.component';
 import {CIPSummaryComponent} from './cipsummary/cipsummary.component';
 import {DictionaryTargetIndicatorsComponent} from './dictionary-target-indicators/dictionary-target-indicators.component';
+import {DxDashboardControlModule} from 'devexpress-dashboard-angular';
 
 @NgModule({
   declarations: [
@@ -80,12 +89,16 @@ import {DictionaryTargetIndicatorsComponent} from './dictionary-target-indicator
     DxChartModule,
     DxPivotGridModule,
     DxSliderModule,
+    DxSelectBoxModule,
+    DxButtonModule,
+    DxDashboardControlModule,
     DxTreeListModule,
     InlineSVGModule.forRoot(),
     ClickOutsideModule,
     NgSelectModule,
     RouterModule.forRoot([
       {path: '', component: VersionComponent, pathMatch: 'full', canActivate: [AuthGuard]},
+      {path: 'dashboard', component: HomeComponent, pathMatch: 'full', canActivate: [AuthGuard]},
       {path: 'analysis', component: DocumentAnalysisComponent},
       {path: 'analytics', component: AnalyticsComponent},
       {path: 'analytics/structure', component: StructureAnalysisComponent},
