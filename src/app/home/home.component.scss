@@ -1,19 +1,24 @@
-.header {
-  display: flex;
-  position: absolute;
-  top: 0;
-  height: 46px;
-  right: 0;
-  left: 0;
-  > .dx-widget {
-    margin: 5px;
-  }
+//.header {
+//  display: flex;
+//  position: absolute;
+//  top: 0;
+//  height: 46px;
+//  right: 0;
+//  left: 0;
+//  > .dx-widget {
+//    margin: 5px;
+//  }
+//
+//}
+//.content {
+//  position: absolute;
+//  top: 46px;
+//  bottom: 0;
+//  right: 0;
+//  left: 0;
+//}
 
-}
-.content {
-  position: absolute;
-  top: 46px;
-  bottom: 0;
-  right: 0;
-  left: 0;
+.container {
+  width: 100%;
+  height: 70vh;
 }
