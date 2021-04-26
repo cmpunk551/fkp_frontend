@@ -24,11 +24,37 @@
   margin-top: 25px;
 }
 
-.container-fluid {
-  background: #F2F7FB;
-  padding: 32px;
+.main-card {
+  padding: 0 30px 30px 30px;
+  border-color: #F2F7FB;
+  border-radius: 8px;
+  border-width: 18px;
+  .main-card-header {
+    background-color: #F2F7FB;
+    margin: 0px -30px;
+    border-color: #192A3B;
+    opacity: 85%;
+  }
 }
 
+.container-fluid {
+  padding: 32px 17px;
+  height: 94vh;
+}
+
+.version-header {
+  font-size: 24px;
+  display: block;
+}
+.title {
+  display: block;
+  border: #F2F7FB;
+  font-size: 25px;
+  font-weight: bold;
+}
+.text-muted{
+  margin-top: 10px;
+}
 .version-select {
   font-size: 24px;
   line-height: 29px;
@@ -41,10 +67,16 @@
 }
 
 .info-cards {
+  background-color: #F2F7FB;
+  border-radius: 8px;
+  width: 72%;
+  margin-top: 25px;
+  padding: 20px;
   .card {
     padding-right: 24px;
     background: #F2F7FB;
     border: none;
+    margin-top: 0;
     .card-header {
       opacity: 25%;
       background-color: #F2F7FB;
@@ -58,20 +90,20 @@
     .card-text {
       font-style: normal;
       font-weight: bold;
-      font-size: 28px;
+      font-size: 16px;
       line-height: 34px;
     }
   }
  }
 .table-card {
-  background: #FFFFFF;
+  border-color: #F2F7FB;
   border-radius: 8px;
-  max-width: 90%;
-  border-color: white;
+  border-width: 18px;
+  max-width: 100%;
   .card-title {
     margin-top: 24px;
     margin-left: 24px;
-    font-size: 20px;
+    font-size: 26px;
     line-height: 24px;
     border: none;
   }
@@ -84,19 +116,19 @@
   }
   .table {
     margin: 16px 24px;
-    max-width: 95%;
+    max-width: 98%;
     display:block;
     max-height : 400px;
   }
   ::ng-deep #finance {
     margin: 16px 24px;
-    max-width: 95%;
+    max-width: 98%;
     max-height : 400px;
     overflow-y: hidden;
     overflow-x: hidden;
   }
 }
 ::ng-deep .chart {
-  max-width: 95%;
+  max-width: 98%;
   overflow-y: auto;
 }

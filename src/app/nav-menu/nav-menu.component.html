@@ -1,8 +1,8 @@
  <div id="sidebar-wrapper" >
-    <div class="sidebar-header">
-      <div class="sidebar-logo" [inlineSVG]="'./assets/icons/logo-icon.svg'" [setSVGAttributes]="{'width' : '40px', 'height' : '40px'}"></div>
-      <h3 [routerLink]="['/dashboard']">АС ИАО СПЦП</h3>
-    </div>
+<!--    <div class="sidebar-header">-->
+<!--      <div class="sidebar-logo" [inlineSVG]="'./assets/icons/logo-icon.svg'" [setSVGAttributes]="{'width' : '40px', 'height' : '40px'}"></div>-->
+<!--      <h3 [routerLink]="['/dashboard']">АС ИАО СПЦП</h3>-->
+<!--    </div>-->
     <div class="side-bar-container">
       <div class="menus">
         <div class="menu">
@@ -22,20 +22,20 @@
           </ul>
         </div>
       </div>
-      <div class="profile align-text-bottom">
-        <div class="side-menu">
-          <ul class="side-menu-list">
-<!--            <li class="menu-list-item">Задачи 10/2</li>-->
-            <li class="menu-list-item" [routerLink]="['/admin']" *ngIf="authService.currentUserIsAdmin">Администрирование</li>
-            <li class="menu-list-item" (click)="logout()">Выйти</li>
-          </ul>
-        </div>
-<!--        <div class="scale">-->
-<!--          <div class="form-group">-->
-<!--            <input type="range" class="custom-range" (ngModelChange)="kek()" [(ngModel)]="scaleValue" id="formControlRange">-->
-<!--          </div>-->
+<!--      <div class="profile align-text-bottom">-->
+<!--        <div class="side-menu">-->
+<!--          <ul class="side-menu-list">-->
+<!--&lt;!&ndash;            <li class="menu-list-item">Задачи 10/2</li>&ndash;&gt;-->
+<!--            <li class="menu-list-item" [routerLink]="['/admin']" *ngIf="authService.currentUserIsAdmin">Администрирование</li>-->
+<!--            <li class="menu-list-item" (click)="logout()">Выйти</li>-->
+<!--          </ul>-->
 <!--        </div>-->
-      </div>
+<!--&lt;!&ndash;        <div class="scale">&ndash;&gt;-->
+<!--&lt;!&ndash;          <div class="form-group">&ndash;&gt;-->
+<!--&lt;!&ndash;            <input type="range" class="custom-range" (ngModelChange)="kek()" [(ngModel)]="scaleValue" id="formControlRange">&ndash;&gt;-->
+<!--&lt;!&ndash;          </div>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--      </div>-->
     </div>
  </div>
 

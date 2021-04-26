@@ -8,9 +8,10 @@
 #sidebar-wrapper .sidebar-heading {
   padding: 0.875rem 1.25rem;
 }
-#sidebar-wrapper .sidebar-heading, h3 {
+#sidebar-wrapper .sidebar-header, h3 {
   font-size: 16px;
   display: inline-block;
+  margin-bottom: 30px;
 }
 .sidebar-logo {
   display: inline-block;
@@ -31,7 +32,7 @@
 }
 
 .menu {
-  margin-top: 28px;
+  //margin-top: 28px;
 }
 .menu-header {
   font-size: 10px;

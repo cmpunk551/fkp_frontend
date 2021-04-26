@@ -1,14 +1,19 @@
 <div class="loader" *ngIf="!isLoaded"></div>
-<div class="container-fluid justify-content-start" *ngIf="isLoaded">
+<div class="container-fluid" *ngIf="isLoaded">
   <ng-container class="card">
-    <app-version-selector
+    <app-version-selector class="text-center"
       [versions]="versions"
       (versionSelected)="changeCurrentVersion($event)"
     ></app-version-selector>
+<!--    <span class="text-center title">Общая информация</span>-->
+    <p class="text-center text-muted">{{current_version.description}}</p>
     <div class="loader" *ngIf="!isInfoLoaded"></div>
-    <ng-container *ngIf="isInfoLoaded">
-      <div class="info-cards row" *ngIf="current_version">
-        <div class="card col-6 flex-row flex-wrap ">
+    <div class="main-card card" *ngIf="isInfoLoaded">
+      <div class="card-header main-card-header">
+        <span class="title">Общая информация</span>
+      </div>
+      <div class="info-cards align-self-center justify-content-center row" *ngIf="current_version">
+        <div class="card col-5 flex-row flex-wrap justify-content-center ">
           <div class="card-header" [inlineSVG]="'./assets/icons/rub.svg'"  [setSVGAttributes]="{'width' : '36px', 'height' : '36px'}"></div>
           <div class="card-block">
             <span class="card-title">ФИНАНСИРОВАНИЕ</span>
@@ -32,7 +37,9 @@
       </div>
       <div class="card table-card">
         <div class="card-body">
-          <span class="card-title">Цели и задачи</span>
+          <div class="text-center card-title">
+            <span>Цели и задачи</span>
+          </div>
           <dx-tree-list class="table"
             [dataSource]="current_version.goalsObjectives"
             keyExpr="id"
@@ -48,33 +55,8 @@
           </dx-tree-list>
         </div>
       </div>
-<!--      <div class="card table-card">-->
-<!--        <div class="card-body">-->
-<!--          <span class="card-title">Проекты</span>-->
-<!--          <dx-data-grid class="table"-->
-<!--                        id="projectContainer"-->
-<!--                        [dataSource]="this.current_version.projectProjects"-->
-<!--                        [hoverStateEnabled]="true"-->
-<!--                        [allowColumnReordering]="true"-->
-<!--                        [showBorders]="true">-->
-<!--            <dxo-header-filter [visible]="true"></dxo-header-filter>-->
-<!--            <dxo-column-chooser [mode]="'select'" [enabled]="true"></dxo-column-chooser>-->
-<!--            <dxi-column  caption="Шифр" dataField="code" dataType="string"></dxi-column>-->
-<!--            <dxi-column caption="Наименование" dataField="name" dataType="string"></dxi-column>-->
-<!--            <dxi-column caption="Тип проекта" dataField="systemName" dataType="string"></dxi-column>-->
-<!--            <dxi-column caption="Стоимость" dataField="cost" dataType="string"></dxi-column>-->
-<!--            <dxi-column caption="Освоено" dataField="mastered" dataType="string"></dxi-column>-->
-<!--            <dxi-column caption="Остаток" dataField="remains" dataType="string"></dxi-column>-->
-<!--            <dxo-search-panel [placeholder]="'Поиск'" [visible]="true"></dxo-search-panel>-->
-<!--            <dxo-group-panel [emptyPanelText]="'Группировать по полю'" [allowColumnDragging]="true" [visible]="true"></dxo-group-panel>-->
-<!--            <dxo-grouping [autoExpandAll]="true"></dxo-grouping>-->
-<!--            <dxo-scrolling mode="virtual"></dxo-scrolling>-->
-<!--          </dx-data-grid>-->
-<!--        </div>-->
-<!--      </div>-->
       <div class="card table-card">
         <div class="card-body chart-card">
-          <span class="card-title">Финансовые лимиты</span>
           <dx-chart
             class="chart"
             id="chart"
@@ -101,7 +83,6 @@
       </div>
       <div class="card table-card">
         <div class="card-body chart-card">
-          <span class="card-title">Финансирование Бюджет/Внебюджет</span>
           <dx-chart
             class="chart"
             id="finance-chart"
@@ -127,7 +108,6 @@
       </div>
       <div class="card table-card">
         <div class="card-body chart-card">
-          <span class="card-title">Финансирование по подразделам раздела НИОКР</span>
           <dx-chart
             class="chart"
             id="finance-by-chapter-chart"
@@ -172,7 +152,7 @@
 <!--          </dx-pivot-grid>-->
 <!--        </div>-->
 <!--      </div>-->
-    </ng-container>
+    </div>
 
   </ng-container>
 </div>

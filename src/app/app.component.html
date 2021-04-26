@@ -1,4 +1,25 @@
 <body>
+<nav class="navbar navbar-expand-lg" *ngIf="currentUser">
+  <a class="navbar-brand" [routerLink]="['/dashboard']">
+    <div class=" sidebar-logo" [inlineSVG]="'./assets/icons/logo-icon.svg'" [setSVGAttributes]="{'width' : '40px', 'height' : '40px'}">
+    </div>
+  </a>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active" *ngIf="showSideBar" >
+        <span class="nav-link header " href="#">АС ИАО СПЦП</span>
+      </li>
+    </ul>
+    <ul class="navbar-nav end-bar">
+      <li class="nav-item" [routerLink]="['/admin']">
+        <span class="nav-link">Администрирование</span>
+      </li>
+      <li class="nav-item" (click)="authService.logout()">
+        <span class="nav-link">Выйти</span>
+      </li>
+    </ul>
+  </div>
+</nav>
   <div class="container-fluid main-container">
     <div class="static-sidebar" *ngIf="currentUser">
       <button  [inlineSVG]="'./assets/icons/toggle-icon.svg'"

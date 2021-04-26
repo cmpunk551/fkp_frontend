@@ -2,10 +2,8 @@
   <div (click)="showSelector()">
     <span *ngIf="current_version" class="select-item">{{current_version.code}}</span>
     <button class="btn dropdown-toggle"></button>
-    <p><small class="text-muted">{{current_version.description}}</small></p>
-
   </div>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"  [ngClass]="{'show': toggleFlag}">
+  <div class="dropdown-menu align-content-center text-center align-self-center justify-content-center" aria-labelledby="dropdownMenuButton"  [ngClass]="{'show': toggleFlag}">
     <ng-select class="dropdown-item"
                [clearable]="false"
                [searchable]="true"

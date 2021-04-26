@@ -19,11 +19,26 @@ code {
 
 body {
   font-family: Golos, Arial, sans-serif;
-  background-color: #F2F7FB;
+  background-color: white;
+  overflow-y: hidden;
+  height: 100%;
+}
+
+.navbar {
+  background-color: #192A3B;
+}
+.navbar-brand {
+  margin-right: 0;
 }
 
 .container-fluid {
   padding: 0;
+  height: 95%;
+
+}
+
+.nav-link:hover {
+  color: white;
 }
 
 .main-container{
@@ -55,12 +70,30 @@ body {
   min-height: 100vh;
   background-color: #192A3B;
   display: block;
+  width: 100px;
 }
 .navbar-toggler {
   margin-left: 24px;
   margin-right: 28px;
   margin-top: 38px;
-  ;
+}
+
+.end-bar{
+  color: #64809F;
+}
+.navbar-title {
+  color: white;
+}
+navbar-collapse{
+  margin-top: 2px;
+}
+.sidebar-logo {
+  display: inline-block;
+  margin-left: 11px;
+}
+.header {
+  color: white;
+  max-resolution: res;
 }
 
 .page-content-wrapper{

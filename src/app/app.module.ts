@@ -22,12 +22,12 @@ import {JwtInterceptor} from './helpers/jwt.interceptor';
 import {ErrorInterceptor} from './helpers/error.interspector';
 import {AdminPanelComponent} from './admin-panel/admin-panel.component';
 import {
-  DxButtonModule,
-  DxChartModule,
-  DxDataGridModule,
+  DxButtonModule, DxChartModule,
+  DxDataGridModule, DxDrawerModule,
+  DxListModule,
   DxPivotGridModule,
-  DxSelectBoxModule,
-  DxSliderModule,
+ DxSelectBoxModule, DxSliderModule,
+  DxToolbarModule,
   DxTreeListModule
 } from 'devextreme-angular';
 import {VersionSelectorComponent} from './version-selector/version-selector.component';
@@ -92,6 +92,9 @@ import {DxDashboardControlModule} from 'devexpress-dashboard-angular';
     DxSelectBoxModule,
     DxButtonModule,
     DxDashboardControlModule,
+    DxDrawerModule,
+    DxToolbarModule,
+    DxListModule,
     DxTreeListModule,
     InlineSVGModule.forRoot(),
     ClickOutsideModule,
